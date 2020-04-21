@@ -21,12 +21,6 @@ The Kubernetes `kubectl` CLI tool will be used to interact with the Kubernetes c
 
 *Status: unknown*{#kubectl-requirements-status}
 
-
-[Check if the Kubectl CLI is connected](didact://?commandId=vscode.didact.cliCommandSuccessful&text=kubectl-cluster-requirements-status$$kubectl%20get%20pod&completion=Checked%20kubectl%20tool%20connection "Tests to see if `kubectl get pod` returns a 0 return code"){.didact}
-
-*Status: unknown*{#kubectl-cluster-requirements-status}
-
-
 **Connection to a Kubernetes cluster**
 
 You need to connect to a Kubernetes cluster in order to run the example.
