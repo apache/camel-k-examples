@@ -3,9 +3,14 @@
 This example demonstrates how to get started with Camel K by showing you some of the most important 
 features that you should know before trying to develop more complex examples.
 
+You can find more information about Apache Camel and Apache Camel K on the [official Camel website](https://camel.apache.org).
+
 ## Before you begin
 
 Read the general instructions in the [root README.md file](../README.md) for setting up your environment and the Kubernetes cluster before looking at this example.
+
+Make sure you've read the [installation instructions](https://camel.apache.org/camel-k/latest/installation/installation.html) for your specific 
+cluster before starting the example.
 
 You should open this file with [Didact](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-didact) if available on your IDE.
 

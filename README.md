@@ -2,6 +2,8 @@
 
 This repository contains a collection of Camel K examples useful to understand how it works, common use cases and the idiomatic programming model.
 
+You can find more information about Apache Camel and Apache Camel K on the [official Camel website](https://camel.apache.org).
+
 ## Before you begin
 
 ### Open the examples in the IDE
