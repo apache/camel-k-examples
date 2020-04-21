@@ -5,6 +5,14 @@ features that you should know before trying to develop more complex examples.
 
 You can find more information about Apache Camel and Apache Camel K on the [official Camel website](https://camel.apache.org).
 
+## Available online
+
+If you don't want to setup your own Kubernetes cluster or your IDE and you just want to get started quickly, this example is also available online in the following places:
+
+- [Camel K Basic Example at learn.openshift.com](https://learn.openshift.com/middleware/courses/middleware-camelk/camel-k-basic).
+
+You don't need to follow the remainder of this readme if you choose to follow the online version.
+
 ## Before you begin
 
 Read the general instructions in the [root README.md file](../README.md) for setting up your environment and the Kubernetes cluster before looking at this example.
