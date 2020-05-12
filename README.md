@@ -47,3 +47,4 @@ Most examples provide a `readme.didact.md` file instead of the standard readme f
 This is the current list of examples:
 
 - [01 Basic](./01-basic): Getting started with Camel K by learning the most important features that you should know before trying to develop more complex examples.
+- [02 Serverless API](./02-serverless-api): Learn how to design an API that manages files in a remote storage location and leverages *Knative* Serving to scale automatically (even to zero instances) based on the current load.
