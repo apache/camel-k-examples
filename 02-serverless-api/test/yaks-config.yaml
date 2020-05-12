@@ -11,4 +11,4 @@ pre:
   run: |
     kamel install -w -n ${YAKS_NAMESPACE}
 
-    kamel run --name api MinioCustomizer.java ../API.java --property-file minio.properties --open-api ../openapi.yaml -d camel-openapi-java -t 3scale.enabled=true -t 3scale.description-path=/openapi.json --profile OpenShift -w -n ${YAKS_NAMESPACE}
+    kamel run API.java --source test/MinioCustomizer.java --property-file test/minio.properties -w -n ${YAKS_NAMESPACE}
