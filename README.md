@@ -48,3 +48,4 @@ This is the current list of examples:
 
 - [01 Basic](./01-basic): Getting started with Camel K by learning the most important features that you should know before trying to develop more complex examples.
 - [02 Serverless API](./02-serverless-api): Learn how to design an API that manages files in a remote storage location and leverages *Knative* Serving to scale automatically (even to zero instances) based on the current load.
+- [03 Knative Source Basic](./03-knative-source-basic): Getting started with Knative Camel Source by learning the most important concepts you should know before trying to develop more complex examples.
