@@ -1,0 +1,31 @@
+#
+# Apache Camel Telegram Source
+#
+apiVersion: sources.knative.dev/v1alpha1
+kind: CamelSource
+metadata:
+  name: camel-telegram-source
+spec:
+  source:
+    integration:
+      configuration:
+        - type: secret
+          value: telegram
+      dependencies:
+        - camel:jackson
+    flow:
+      from:
+        uri: telegram:bots
+        parameters:
+          # Telegram token obtained by BotFather and defined
+          # in the telegram.properties
+          authorizationToken: "{{telegram.token}}"
+        steps:
+        - to: "log:received?showAll=true&multiline=true"
+        - marshal:
+            json: {}
+  sink:
+    ref:
+      apiVersion: messaging.knative.dev/v1beta1
+      kind: InMemoryChannel
+      name: telegram
