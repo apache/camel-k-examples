@@ -1,6 +1,6 @@
 # Camel Knative Source Basic Example
 
-This example demonstrates how to get started with Camel based Knative sources by showing you some of the most important 
+This example demonstrates how to get started with Camel based Knative sources by showing you some of the most important
 features that you should know before trying to develop more complex examples.
 
 You can find more information about Apache Camel and Apache Camel K on the [official Camel website](https://camel.apache.org).
@@ -9,7 +9,7 @@ You can find more information about Apache Camel and Apache Camel K on the [offi
 
 Read the general instructions in the [root README.md file](../README.md) for setting up your environment and the Kubernetes cluster before looking at this example.
 
-Make sure you've read the [installation instructions](https://camel.apache.org/camel-k/latest/installation/installation.html) for your specific 
+Make sure you've read the [installation instructions](https://camel.apache.org/camel-k/latest/installation/installation.html) for your specific
 cluster before starting the example.
 
 You should open this file with [Didact](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-didact) if available on your IDE.
@@ -101,7 +101,7 @@ Now we can set the `camel-source` namespace as default namespace for the followi
 ```
 kubectl config set-context --current --namespace=camel-source
 ```
-([^ execute](didact://?commandId=vscode.didact.sendNamedTerminalAString&text=camelTerm$$kubectl%20config%20set-context%20--current%20--namespace%3Dcamel-basic&completion=New%20project%20creation. "Opens a new terminal and sends the command above"){.didact})
+([^ execute](didact://?commandId=vscode.didact.sendNamedTerminalAString&text=camelTerm$$kubectl%20config%20set-context%20--current%20--namespace%3Dcamel-source&completion=New%20project%20creation. "Opens a new terminal and sends the command above"){.didact})
 
 You need to install Camel K in the `camel-source` namespace (or globally in the whole cluster).
 In many settings (e.g. OpenShift, CRC), it's sufficient to execute the following command to install Camel K:
@@ -124,17 +124,17 @@ You should find an IntegrationPlatform in status `Ready`.
 
 You can now proceed to the next section.
 
-## 2. Preparing the environment 
+## 2. Preparing the environment
 
-This repository contains a simple [telegram.properties](didact://?commandId=vscode.openFolder&projectFilePath=01-basic/telegram.properties&completion=Opened%20the%telegram.properties%20file "Opens the telegram.properties file"){.didact} that can be used to generate a Kubernetes Secret with the Telergam Bot Token obtained with the (@BotFather)[hhtps://telegram.me/botfather] by replacing `
-<token-from-botfather>` with the actual token. 
+This repository contains a simple [telegram.properties](didact://?commandId=vscode.openFolder&projectFilePath=01-basic/telegram.properties&completion=Opened%20the%telegram.properties%20file "Opens the telegram.properties file"){.didact} that can be used to generate a Kubernetes Secret with the Telegram Bot Token obtained with the [@BotFather](https://telegram.me/botfather) by replacing `
+<token-from-botfather>` with the actual token.
 
 ```
 kubectl create secret generic telegram --from-file=telegram.properties
 ```
 ([^ execute](didact://?commandId=vscode.didact.sendNamedTerminalAString&text=camelTerm$$kubectl%20create%20secret%20generic%20telegram%20--from-file%3Dtelegram.properties&completion=secret%20%22telegram%22%20created. "Create a secret with Telegram credentials"){.didact})
 
-As the example levareges (Knative Eventing channels)[https://knative.dev/docs/eventing/channels/], we need to create the one that the example will use:
+As the example levareges [Knative Eventing channels](https://knative.dev/docs/eventing/channels/), we need to create the one that the example will use:
 
 ```
 kubectl apply -f telegram-channel.yaml
@@ -143,7 +143,7 @@ kubectl apply -f telegram-channel.yaml
 
 ## 2. Running a Camel Source
 
-This repository contains a simple Camel Source based on the (Telegram component)[https://camel.apache.org/components/latest/telegram-component.html] that forward messages received by the bot to a Knative channel named `telegram`
+This repository contains a simple Camel Source based on the [Telegram component](https://camel.apache.org/components/latest/telegram-component.html) that forward messages received by the bot to a Knative channel named `telegram`
 
 Use the following command to deploy the Camel Source:
 
@@ -162,7 +162,7 @@ kamel run telegram-consumer.groovy --dev
 ([^ execute](didact://?commandId=vscode.didact.sendNamedTerminalAString&text=camelTerm$$kamel%20run%20telegram-consumer.groovy%20--dev&completion=Camel%20K%20telegram-consumer%20integration%20run%20in%20dev%20mode. "Opens a new terminal and sends the command above"){.didact})
 
 
-If everything is ok, after the build phase finishes, you should see the Camel integration running and printing the mesage you ahve sent to tour Telegram Bot.
+If everything is ok, after the build phase finishes, you should see the Camel integration running and printing the mesage you have sent to tour Telegram Bot.
 
 ## 4. Uninstall
 
@@ -170,5 +170,4 @@ To cleanup everything, execute the following command:
 
 ```kubectl delete namespace camel-source```
 
-([^ execute](didact://?commandId=vscode.didact.sendNamedTerminalAString&text=camelTerm$$kubectl%20delete%20namespace%20camel-basic&completion=Removed%20the%20namespace%20from%20the%20cluster. "Cleans up the cluster after running the example"){.didact})
-
+([^ execute](didact://?commandId=vscode.didact.sendNamedTerminalAString&text=camelTerm$$kubectl%20delete%20namespace%20camel-source&completion=Removed%20the%20namespace%20from%20the%20cluster. "Cleans up the cluster after running the example"){.didact})
