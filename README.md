@@ -50,4 +50,5 @@ This is the current list of examples:
 - [02 Serverless API](./02-serverless-api): Learn how to design an API that manages files in a remote storage location and leverages *Knative* Serving to scale automatically (even to zero instances) based on the current load.
 - [03 Knative Source Basic](./03-knative-source-basic): Getting started with Knative Camel Source by learning the most important concepts you should know before trying to develop more complex examples.
 - [04 AWS Kinesis Source Basic](./04-aws-kinesis-source-basic): Learn how to consume AWS Kinesis events using Knative Camel Source.
+- [10 Knative Source Salesforce](./10-knative-source-salesforce): Learn how to create a Knative Camel Source for Salesforce.
 - [11 Knative Source Slack](./11-knative-source-slack): Getting started with Slack integration using Knative Camel Source.
