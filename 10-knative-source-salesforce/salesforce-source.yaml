@@ -1,0 +1,32 @@
+#
+# Apache Camel Salesforce Source
+#
+apiVersion: sources.knative.dev/v1alpha1
+kind: CamelSource
+metadata:
+  name: camel-salesforce-source
+spec:
+  source:
+    integration:
+      configuration:
+        - type: secret
+          value: salesforce
+    flow:
+      from:
+        uri: salesforce:camelTestTopic
+        parameters:
+          notifyForFields: ALL
+          updateTopic: true
+          notifyForOperationCreate: true
+          notifyForOperationUpdate: false
+          notifyForOperationDelete: false
+          notifyForOperationUndelete: false
+          sObjectQuery: SELECT Id, Name, Email, Phone FROM Contact
+        steps:
+        - to: "log:received?showAll=true&multiline=true"
+
+  sink:
+    ref:
+      apiVersion: messaging.knative.dev/v1beta1
+      kind: InMemoryChannel
+      name: salesforce
