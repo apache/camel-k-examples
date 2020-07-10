@@ -1,0 +1,31 @@
+#
+# Apache Camel Slack Source
+#
+apiVersion: sources.knative.dev/v1alpha1
+kind: CamelSource
+metadata:
+  name: camel-slack-source
+spec:
+  source:
+    integration:
+      configuration:
+        - type: secret
+          value: slack
+      dependencies:
+        - camel:jackson
+    flow:
+      from:
+        uri: slack:general
+        parameters:
+          # Slack token defined in slack.properties
+          token: "{{slack.token}}"
+          maxResults: 1
+        steps:
+        - to: "log:received?showAll=true&multiline=true"
+        - marshal:
+            json: {}
+  sink:
+    ref:
+      apiVersion: messaging.knative.dev/v1beta1
+      kind: InMemoryChannel
+      name: slack
