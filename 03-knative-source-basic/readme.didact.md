@@ -126,7 +126,7 @@ You can now proceed to the next section.
 
 ## 2. Preparing the environment
 
-This repository contains a simple [telegram.properties](didact://?commandId=vscode.openFolder&projectFilePath=01-basic/telegram.properties&completion=Opened%20the%telegram.properties%20file "Opens the telegram.properties file"){.didact} that can be used to generate a Kubernetes Secret with the Telegram Bot Token obtained with the [@BotFather](https://telegram.me/botfather) by replacing `
+This repository contains a simple [telegram.properties](didact://?commandId=vscode.openFolder&projectFilePath=03-knative-source-basic/telegram.properties&completion=Opened%20the%20telegram.properties%20file "Opens the telegram.properties file"){.didact} that can be used to generate a Kubernetes Secret with the Telegram Bot Token obtained with the [@BotFather](https://telegram.me/botfather) by replacing `
 <token-from-botfather>` with the actual token.
 
 ```
