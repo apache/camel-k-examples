@@ -16,12 +16,14 @@ spec:
         - camel:jackson
         # Needed for the AWS Kinesis component
         - camel:camel-aws-kinesis
+        - mvn:com.fasterxml.jackson.dataformat/jackson-dataformat-cbor/2.10.4
     flow:
       from:
         uri: aws-kinesis:stream
         parameters:
           secretKey: "{{aws.kinesis.secretKey}}"
           accessKey: "{{aws.kinesis.accessKey}}"
+          region: "EU_WEST_1"
         steps:
         - to: "log:received?showAll=true&multiline=true"
         - marshal:
