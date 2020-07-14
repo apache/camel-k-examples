@@ -47,7 +47,7 @@ You need the Apache Camel K CLI ("kamel") in order to access all Camel K feature
 
 **Knative installed on the cluster**
 
-The cluster also needs to have Knative installed and working. Refer to the [official Knative documentation](https://knative.dev/docs/install/) for information on how to install it in your cluster.
+The cluster also needs to have Knative installed and working. Refer to the [official Knative documentation](https://knative.dev/v0.15-docs/install/) for information on how to install it in your cluster.
 
 [Check if the Knative is installed](didact://?commandId=vscode.didact.requirementCheck&text=kservice-project-check$$kubectl%20api-resources%20--api-group=serving.knative.dev$$kservice%2Cksvc&completion=Verified%20Knative%20services%20installation. "Verifies if Knative is installed"){.didact}
 
