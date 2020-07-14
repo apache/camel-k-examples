@@ -43,7 +43,7 @@ You need the Apache Camel K CLI ("kamel") in order to access all Camel K feature
 
 **Knative installed on the cluster**
 
-The cluster also needs to have Knative installed and working. Refer to the [official Knative documentation](https://knative.dev/docs/install/) for information on how to install it in your cluster.
+The cluster also needs to have Knative installed and working. Refer to the [official Knative documentation](https://knative.dev/v0.15-docs/install/) for information on how to install it in your cluster.
 
 [Check if the Knative Serving is installed](didact://?commandId=vscode.didact.requirementCheck&text=kserving-project-check$$kubectl%20api-resources%20--api-group=serving.knative.dev$$kservice%2Cksvc "Verifies if Knative Serving is installed"){.didact}
 
@@ -55,7 +55,7 @@ The cluster also needs to have Knative installed and working. Refer to the [offi
 
 **Knative Camel Source installed on the cluster**
 
-The cluster also needs to have installed the Knative Camel Source from the camel.yaml in the [Eventing Sources release page](https://github.com/knative/eventing-contrib/releases).
+The cluster also needs to have installed the Knative Camel Source from the camel.yaml in the [Eventing Sources release page](https://github.com/knative/eventing-contrib/releases/tag/v0.15.0).
 
 [Check if the Knative Camel Source is installed](didact://?commandId=vscode.didact.requirementCheck&text=kservice-project-check$$kubectl%20api-resources%20--api-group=sources.knative.dev$$camelsources "Verifies if Knative Camel Source is installed"){.didact}
 
@@ -141,7 +141,7 @@ kubectl create secret generic slack --from-file=slack.properties
 ```
 ([^ execute](didact://?commandId=vscode.didact.sendNamedTerminalAString&text=camelTerm$$kubectl%20create%20secret%20generic%20slack%20--from-file%3Dslack.properties "Create a secret with lack credentials"){.didact})
 
-As the example levareges [Knative Eventing channels](https://knative.dev/docs/eventing/channels/), we need to create the one that the example will use:
+As the example levareges [Knative Eventing channels](https://knative.dev/v0.15-docs/eventing/channels/), we need to create the one that the example will use:
 
 ```
 kubectl apply -f slack-channel.yaml
