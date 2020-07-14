@@ -23,7 +23,7 @@ spec:
         parameters:
           secretKey: "{{aws.kinesis.secretKey}}"
           accessKey: "{{aws.kinesis.accessKey}}"
-          region: "EU_WEST_1"
+          region: "{{aws.kinesis.region}}"
         steps:
         - to: "log:received?showAll=true&multiline=true"
         - marshal:
