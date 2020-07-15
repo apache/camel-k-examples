@@ -1,0 +1,40 @@
+#
+# Apache Camel jira Source
+#
+apiVersion: sources.knative.dev/v1alpha1
+kind: CamelSource
+metadata:
+  name: camel-jira-new-issues-source
+spec:
+  source:
+    integration:
+      configuration:
+        - type: secret
+          value: jira
+      dependencies:
+        - camel:jackson
+        - mvn:org.apache.httpcomponents:httpclient:jar:4.5.12
+        - mvn:com.atlassian.jira:jira-rest-java-client-core:jar:5.2.1
+        - mvn:com.atlassian.jira:jira-rest-java-client-api:jar:5.2.1
+    flow:
+      from:
+        uri: jira:newIssues
+        parameters:
+          # in the jira.properties
+          jiraUrl: "{{jira.url}}"
+          username: "{{jira.username}}"
+          #if jira cloud is used, use created API token instead of your password.
+          password: "{{jira.password}}"
+          jql: "{{jira.jql}}"
+          delay: "500"
+        steps:
+          - to: "log:received?showAll=true&multiline=true"
+          - marshal:
+              json:
+                disable-features: "FAIL_ON_EMPTY_BEANS"
+
+  sink:
+    ref:
+      apiVersion: messaging.knative.dev/v1alpha1
+      kind: InMemoryChannel
+      name: jira
