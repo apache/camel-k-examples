@@ -19,6 +19,8 @@ spec:
         - mvn:com.fasterxml.jackson.dataformat/jackson-dataformat-cbor/2.10.4
     flow:
       from:
+        # On the URI below, the Kinesis stream named 'stream' can be adjusted
+        # to any value suitable in your scenario (ie.: aws-kinesis:my-stream-name)
         uri: aws-kinesis:stream
         parameters:
           secretKey: "{{aws.kinesis.secretKey}}"
