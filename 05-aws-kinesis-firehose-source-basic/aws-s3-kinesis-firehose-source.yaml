@@ -1,0 +1,35 @@
+#
+# Apache Camel AWS S3 Source
+#
+apiVersion: sources.knative.dev/v1alpha1
+kind: CamelSource
+metadata:
+  name: camel-aws-s3-kinesis-firehose-source
+spec:
+  source:
+    integration:
+      configuration:
+        - type: secret
+          value: aws-services
+      dependencies:
+        # Needed for the json part on the flow/steps below
+        - camel:jackson
+        # Needed for the AWS S3 component component
+        - camel:camel-aws2-s3
+    flow:
+      from:
+        uri: aws2-s3:datalake25
+        parameters:
+          secretKey: "{{aws.s3.secretKey}}"
+          accessKey: "{{aws.s3.accessKey}}"
+          region: "{{aws.s3.region}}"
+          moveAfterRead: "false"
+          deleteAfterRead: "false"
+          autocloseBody: "false"
+        steps:
+        - to: "log:received?showAll=true&multiline=true"
+  sink:
+    ref:
+      apiVersion: messaging.knative.dev/v1beta1
+      kind: InMemoryChannel
+      name: aws-s3-kinesis-firehose
