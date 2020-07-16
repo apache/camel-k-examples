@@ -137,9 +137,9 @@ kubectl create secret generic aws-services --from-file=aws-services.properties
 As the example levareges [Knative Eventing channels](https://knative.dev/v0.15-docs/eventing/channels/), we need to create the one that the example will use:
 
 ```
-kubectl apply -f aws-s3-kinesis-firehose-channel.yaml
+kubectl apply -f aws-s3-channel.yaml
 ```
-([^ execute](didact://?commandId=vscode.didact.sendNamedTerminalAString&text=camelTerm$$kubectl%20apply%20-f%20aws-s3-kinesis-firehose-channel.yaml&completion=inmemorychannel.messaging.knative.dev/aws-s3-kinesis-firehose$20created. "Create a Knative InMemoryChannel named aws-kinesis"){.didact})
+([^ execute](didact://?commandId=vscode.didact.sendNamedTerminalAString&text=camelTerm$$kubectl%20apply%20-f%20aws-s3-channel.yaml&completion=inmemorychannel.messaging.knative.dev/aws-s3$20created. "Create a Knative InMemoryChannel named aws-kinesis"){.didact})
 
 
 ## 2. Running a Camel Source
@@ -149,9 +149,9 @@ This repository contains a simple Camel Source based on the [AWS Kinesis compone
 Use the following command to deploy the Camel Source:
 
 ```
-kubectl apply -f aws-s3-kinesis-firehose-source.yaml
+kubectl apply -f aws-s3-source.yaml
 ```
-([^ execute](didact://?commandId=vscode.didact.sendNamedTerminalAString&text=camelTerm$$kubectl%20apply%20-f%20aws-s3-kinesis-firehose-source.yaml&completion=camelsource.sources.knative.dev/camel-aws-s3-kinesis-firehose-source%20created. "Opens a new terminal and sends the command above"){.didact})
+([^ execute](didact://?commandId=vscode.didact.sendNamedTerminalAString&text=camelTerm$$kubectl%20apply%20-f%20aws-s3-source.yaml&completion=camelsource.sources.knative.dev/camel-aws-s3-source%20created. "Opens a new terminal and sends the command above"){.didact})
 
 ## 2. Running a basic integration to create Kinesis events for consumption by the Camel Source
 
