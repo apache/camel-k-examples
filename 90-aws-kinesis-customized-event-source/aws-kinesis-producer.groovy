@@ -1,4 +1,4 @@
-// camel-k: dependency=camel-aws-kinesis dependency=mvn:org.apache.camel.k.examples:custom-kinesis-configuration:1.0.1
+// camel-k: dependency=camel-aws-kinesis dependency=mvn:org.apache.camel.k.examples:custom-kinesis-configuration:1.0.3
 //
 // Apache Camel Kinesis Consumer
 //

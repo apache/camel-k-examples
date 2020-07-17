@@ -12,8 +12,8 @@ spec:
         # What other types do we have?
         - type: secret
           value: aws-kinesis
-        - type: env
-          value: AWS_HOST=localstack:4568
+        - type: property
+          value: amazon.host=localstack:4568
         - type: property
           value: camel.component.aws-kinesis.configuration=#class:org.apache.camel.k.examples.CustomKinesisConfiguration
       dependencies:
@@ -34,7 +34,7 @@ spec:
         # actual AWS Kinesis instance.
         - camel:camel-aws-kinesis
         # Provides the custom Kinesis configuration
-        - mvn:org.apache.camel.k.examples/custom-kinesis-configuration:1.0.1
+        - mvn:org.apache.camel.k.examples/custom-kinesis-configuration:1.0.3
     flow:
       from:
         uri: aws-kinesis:stream

@@ -183,9 +183,9 @@ comes with a sample producer that will send 100 messages with the text `Hello Ca
 every 3 seconds.
 
 ```
-kamel run --secret aws-kinesis --property camel.component.aws-kinesis.configuration=#class:org.apache.camel.k.examples.CustomKinesisConfiguration  --env AWS_HOST=localstack:4568 aws-kinesis-producer.groovy
+kamel run --secret aws-kinesis --dependency mvn:org.apache.camel.k.examples:custom-kinesis-configuration:1.0.3 --property camel.component.aws-kinesis.configuration=#class:org.apache.camel.k.examples.CustomKinesisConfiguration  --property amazon.host=localstack:4568 aws-kinesis-producer.groovy
 ```
-([^ execute](didact://?commandId=vscode.didact.sendNamedTerminalAString&text=camelTerm$$kamel%20run%20--secret%20aws-kinesis%20--dependency%20mvn:org.apache.camel.k.examples:custom-kinesis-configuration:1.0.1%20--property%20camel.component.aws-kinesis.configuration=%23class:org.apache.camel.k.examples.CustomKinesisConfiguration%20%20--env%20AWS_HOST=localstack:4568%20aws-kinesis-producer.groovy&completion=Ran%20the%20AWS%20Kinesis%20producer. "Opens a terminal and runs the command above"){.didact})
+([^ execute](didact://?commandId=vscode.didact.sendNamedTerminalAString&text=camelTerm$$kamel%20run%20--secret%20aws-kinesis%20--dependency%20mvn:org.apache.camel.k.examples:custom-kinesis-configuration:1.0.3%20--property%20camel.component.aws-kinesis.configuration=%23class:org.apache.camel.k.examples.CustomKinesisConfiguration%20--property%20amazon.host=localstack:4568%20aws-kinesis-producer.groovy&completion=Ran%20the%20AWS%20Kinesis%20producer. "Opens a terminal and runs the command above"){.didact})
 
 If everything is ok, after the build phase finishes, you should see the Camel integration running.
 
