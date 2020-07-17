@@ -16,6 +16,7 @@ spec:
         - mvn:org.apache.httpcomponents:httpclient:jar:4.5.12
         - mvn:com.atlassian.jira:jira-rest-java-client-core:jar:5.2.1
         - mvn:com.atlassian.jira:jira-rest-java-client-api:jar:5.2.1
+        - mvn:org.codehaus.jettison:jettison:jar:1.4.1
     flow:
       from:
         uri: jira:newIssues
@@ -30,8 +31,7 @@ spec:
         steps:
           - to: "log:received?showAll=true&multiline=true"
           - marshal:
-              json:
-                disable-features: "FAIL_ON_EMPTY_BEANS"
+              json: {}
 
   sink:
     ref:
