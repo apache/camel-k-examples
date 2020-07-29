@@ -1,0 +1,52 @@
+#
+# Apache Camel AWS Kinesis Source
+#
+apiVersion: sources.knative.dev/v1alpha1
+kind: CamelSource
+metadata:
+  name: camel-aws-kinesis-source
+spec:
+  source:
+    integration:
+      configuration:
+        # What other types do we have?
+        - type: secret
+          value: aws-kinesis
+        - type: property
+          value: amazon.host=localstack:4568
+        - type: property
+          value: camel.component.aws-kinesis.configuration=#class:org.apache.camel.k.examples.CustomKinesisConfiguration
+      dependencies:
+        # Needed for the json part on the flow/steps below
+        - camel:jackson
+        # Needed for the component
+        #
+        # NOTE: the dependencies used by the source may change under different
+        # circumstances. In the case of this example, it is showing how to use a
+        # LocalStack instance to simulate a AWS Kinesis stream, which is useful for
+        # testing. In this case, one of the things that the custom client does is
+        # disabling cbor so that the response is parseable.
+        # However, when pointing to a real AWS Kinesis instance it may be necessary to
+        # adjust the dependencies so that jackson-dataformat-cbor is included on the
+        # dependencies. As a general recommendation, checking the example
+        # 04-aws-kinesis-source-basic which targets AWS Kinesis is also recommended to
+        # verify what dependencies, restrictions or requirements apply when using an
+        # actual AWS Kinesis instance.
+        - camel:camel-aws-kinesis
+        # Provides the custom Kinesis configuration
+        - mvn:org.apache.camel.k.examples/custom-kinesis-configuration:1.0.3
+    flow:
+      from:
+        uri: aws-kinesis:stream
+        parameters:
+          secretKey: "{{aws.kinesis.secretKey}}"
+          accessKey: "{{aws.kinesis.accessKey}}"
+        steps:
+        - to: "log:received?showAll=true&multiline=true"
+        - marshal:
+            json: {}
+  sink:
+    ref:
+      apiVersion: messaging.knative.dev/v1beta1
+      kind: InMemoryChannel
+      name: aws-kinesis

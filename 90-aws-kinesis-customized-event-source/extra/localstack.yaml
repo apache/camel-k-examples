@@ -1,0 +1,40 @@
+---
+# ------------------- Internal Services ------------------- #
+apiVersion: v1
+kind: Service
+metadata:
+  name: localstack
+spec:
+  type: ClusterIP
+  ports:
+    - port: 4568
+  selector:
+    app: localstack
+    component: localstack
+
+---
+# ------------------- Deployment ------------------- #
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: localstack
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: localstack
+      app: localstack
+  template:
+    metadata:
+      labels:
+        component: localstack
+        app: localstack
+    spec:
+      containers:
+        - name: localstack
+          image: localstack/localstack
+          ports:
+            - containerPort: 4568
+          env:
+            - name: SERVICES
+              value: kinesis
