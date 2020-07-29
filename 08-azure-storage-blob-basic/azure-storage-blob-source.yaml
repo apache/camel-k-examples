@@ -1,0 +1,32 @@
+#
+# Apache Camel Azure Storage Blob Source
+#
+apiVersion: sources.knative.dev/v1alpha1
+kind: CamelSource
+metadata:
+  name: camel-azure-storage-blob
+spec:
+  source:
+    integration:
+      configuration:
+        - type: secret
+          value: azure-storage-blob
+      dependencies:
+        # Needed for the Azure Storage Blob component
+        - camel:camel-azure-storage-blob
+    flow:
+      from:
+        # On the URI below, the Azure account name named 'camelazure' and container name named 'orders'
+        # can be adjusted to any values suitable in your scenario
+        uri: azure-storage-blob:camelazure/orders
+        parameters:
+          blobName: "{{azure.blob.blobName}}"
+          accessKey: "{{azure.blob.accessKey}}"
+
+        steps:
+        - to: "log:received?showAll=true&multiline=true"
+  sink:
+    ref:
+      apiVersion: messaging.knative.dev/v1beta1
+      kind: InMemoryChannel
+      name: azure-blob
