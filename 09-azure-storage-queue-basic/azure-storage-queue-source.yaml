@@ -1,0 +1,31 @@
+#
+# Apache Camel Azure Storage Queue Source
+#
+apiVersion: sources.knative.dev/v1alpha1
+kind: CamelSource
+metadata:
+  name: camel-azure-storage-queue
+spec:
+  source:
+    integration:
+      configuration:
+        - type: secret
+          value: azure-storage-queue
+      dependencies:
+        # Needed for the Azure Storage Queue component
+        - camel:camel-azure-storage-queue
+    flow:
+      from:
+        # On the URI below, the Azure account name named 'camelazure' and queue name named 'messages'
+        # can be adjusted to any values suitable in your scenario
+        uri: azure-storage-queue:camelazure/messages
+        parameters:
+          accessKey: "{{azure.queue.accessKey}}"
+
+        steps:
+        - to: "log:received?showAll=true&multiline=true"
+  sink:
+    ref:
+      apiVersion: messaging.knative.dev/v1beta1
+      kind: InMemoryChannel
+      name: azure-queue
