@@ -25,7 +25,7 @@ spec:
           secretKey: "{{aws.sqs.secretKey}}"
           accessKey: "{{aws.sqs.accessKey}}"
           region: "{{aws.sqs.region}}"
-          deleteAfterRead: "false"
+          deleteAfterRead: "true"
         steps:
         - to: "log:received?showAll=true&multiline=true"
         - marshal:
