@@ -23,8 +23,9 @@ spec:
           secretKey: "{{aws.s3.secretKey}}"
           accessKey: "{{aws.s3.accessKey}}"
           region: "{{aws.s3.region}}"
-          moveAfterRead: "false"
-          deleteAfterRead: "false"
+          moveAfterRead: "true"
+          deleteAfterRead: "true"
+          destinationBucket: "backupdatalake25"
           autocloseBody: "false"
         steps:
         - to: "log:received?showAll=true&multiline=true"
