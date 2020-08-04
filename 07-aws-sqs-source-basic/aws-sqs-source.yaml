@@ -18,8 +18,8 @@ spec:
         - camel:camel-aws2-sqs
     flow:
       from:
-        # On the URI below, the Kinesis stream named 'stream' can be adjusted
-        # to any value suitable in your scenario (ie.: aws-sqs:my-stream-name)
+        # On the URI below, the queue named 'eventqueue' can be adjusted
+        # to any value suitable in your scenario (ie.: aws-sqs:my-queue)
         uri: aws2-sqs:eventqueue
         parameters:
           secretKey: "{{aws.sqs.secretKey}}"
