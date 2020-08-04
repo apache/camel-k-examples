@@ -15,6 +15,7 @@ cluster before starting the example.
 You should open this file with [Didact](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-didact) if available on your IDE.
 
 You must create an AWS Kinesis Firehose delivery stream named `stream` and point it to an S3 bucket called `datalake` followed by a random number on your AWS account.
+Also you'll need to create a bucket `backupdatalake` followed by a random number on your AWS account. This bucket will be used to move the file once consumed from the bucket `datalake` as backup.
 
 ## Requirements
 
