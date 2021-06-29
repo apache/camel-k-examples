@@ -11,4 +11,4 @@ pre:
   run: |
     kamel install -w -n ${YAKS_NAMESPACE}
 
-    kamel run API.java --source test/MinioCustomizer.java --property-file test/minio.properties -w -n ${YAKS_NAMESPACE}
+    kamel run API.java --source test/MinioCustomizer.java --property file:test/minio.properties -w -n ${YAKS_NAMESPACE}
