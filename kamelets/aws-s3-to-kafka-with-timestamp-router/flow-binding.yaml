@@ -1,0 +1,40 @@
+apiVersion: camel.apache.org/v1alpha1
+kind: KameletBinding
+metadata:
+  name: s3-to-kafka-with-timestamp-router
+spec:
+  source:
+    ref:
+      kind: Kamelet
+      apiVersion: camel.apache.org/v1alpha1
+      name: aws-s3-source
+    properties:
+      bucketNameOrArn: 'camel-kafka-connector'
+      accessKey: 'access'
+      secretKey: 'secrets'
+      region: 'reg'
+  steps:
+  -  ref:
+      kind: Kamelet
+      apiVersion: camel.apache.org/v1alpha1
+      name: log-sink
+  - ref:
+      kind: Kamelet
+      apiVersion: camel.apache.org/v1alpha1
+      name: timestamp-router-action
+    properties:
+      topicFormat: 's3-$[timestamp]'
+      timestampFormat: 'YYYY-MM-dd-hh-mm'
+      timestampHeaderName: 'CamelAwsS3LastModified'
+  - ref:
+      kind: Kamelet
+      apiVersion: camel.apache.org/v1alpha1
+      name: log-sink
+  sink:
+    ref:
+      kind: Kamelet
+      apiVersion: camel.apache.org/v1alpha1
+      name: kafka-not-secured-sink
+    properties:
+      brokers: 'my-cluster-kafka-bootstrap:9092'
+      topic: 'test-topic'
