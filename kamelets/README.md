@@ -8,7 +8,7 @@ Follow the instructions from the Repository Root Folder's README.
 
 ## Important Notes
 
-All the Kamelet examples in this folder have been tested on Camel-K 1.5.0 SNAPSHOT.
+All the Kamelet examples in this folder have been tested on Camel-K 1.5.0.
 
 ## Examples List
 
