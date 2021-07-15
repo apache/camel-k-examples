@@ -1,0 +1,37 @@
+apiVersion: camel.apache.org/v1alpha1
+kind: KameletBinding
+metadata:
+  name: kafka-to-kafka-with-regex-router
+spec:
+  source:
+    ref:
+      kind: Kamelet
+      apiVersion: camel.apache.org/v1alpha1
+      name: kafka-not-secured-source
+    properties:
+      brokers: 'my-cluster-kafka-bootstrap:9092'
+      topic: 'test-topic-1'
+  steps:
+  -  ref:
+      kind: Kamelet
+      apiVersion: camel.apache.org/v1alpha1
+      name: log-sink
+  - ref:
+      kind: Kamelet
+      apiVersion: camel.apache.org/v1alpha1
+      name: regex-router-action
+    properties:
+      regex: "test-(.*)"
+      replacement: "$1"
+  - ref:
+      kind: Kamelet
+      apiVersion: camel.apache.org/v1alpha1
+      name: log-sink
+  sink:
+    ref:
+      kind: Kamelet
+      apiVersion: camel.apache.org/v1alpha1
+      name: kafka-not-secured-sink
+    properties:
+      brokers: 'my-cluster-kafka-bootstrap:9092'
+      topic: 'test-topic-3'
