@@ -8,8 +8,8 @@
 
 - Run the following commands
 
-kubectl apply -f log-sink.kamelet.yaml 
-kubectl apply -f flow-binding.yaml 
+  - kubectl apply -f log-sink.kamelet.yaml -n kafka
+  - kubectl apply -f flow-binding.yaml -n kafka
 
 - Check logs
 
