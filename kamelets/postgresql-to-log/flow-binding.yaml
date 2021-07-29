@@ -1,0 +1,23 @@
+apiVersion: camel.apache.org/v1alpha1
+kind: KameletBinding
+metadata:
+  name: sql-to-log
+spec:
+  source:
+    ref:
+      kind: Kamelet
+      apiVersion: camel.apache.org/v1alpha1
+      name: postgresql-source
+    properties:
+      serverName: my-release-postgresql.default.svc.cluster.local
+      username: postgres
+      password: 9f1IenvnEn
+      query: 'SELECT * FROM accounts'
+      port: 5432
+      databaseName: postgres
+      consumedQuery: 'delete from accounts where user_id = :#user_id'
+  sink:
+    ref:
+      kind: Kamelet
+      apiVersion: camel.apache.org/v1alpha1
+      name: log-sink
