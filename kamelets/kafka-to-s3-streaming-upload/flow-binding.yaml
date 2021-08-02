@@ -1,0 +1,26 @@
+apiVersion: camel.apache.org/v1alpha1
+kind: KameletBinding
+metadata:
+  name: kafka-to-s3-streaming-upload
+spec:
+  source:
+    ref:
+      kind: Kamelet
+      apiVersion: camel.apache.org/v1alpha1
+      name: kafka-not-secured-source
+    properties:
+      brokers: 'my-cluster-kafka-bootstrap:9092'
+      topic: 'test-topic'
+  sink:
+    ref:
+      kind: Kamelet
+      apiVersion: camel.apache.org/v1alpha1
+      name: aws-s3-streaming-upload-sink
+    properties:
+      bucketNameOrArn: 'kamelets-demo'
+      accessKey: 'access'
+      secretKey: 'secret'
+      region: 'region'
+      batchSize: '1000000'
+      batchMessageNumber: 5
+      keyName: KafkaTestFile.txt
