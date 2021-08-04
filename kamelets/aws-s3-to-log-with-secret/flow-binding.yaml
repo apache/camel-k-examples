@@ -1,0 +1,22 @@
+apiVersion: camel.apache.org/v1alpha1
+kind: KameletBinding
+metadata:
+  name: s3-to-log-with-secret
+spec:
+  integration:
+    configuration:
+    - type: "secret"
+      value: "aws-s3-secret"
+  source:
+    ref:
+      kind: Kamelet
+      apiVersion: camel.apache.org/v1alpha1
+      name: aws-s3-source
+    properties:
+      bucketNameOrArn: 'kamelets-demo'
+      region: 'eu-west-1'
+  sink:
+    ref:
+      kind: Kamelet
+      apiVersion: camel.apache.org/v1alpha1
+      name: log-sink
