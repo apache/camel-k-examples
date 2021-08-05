@@ -1,0 +1,28 @@
+apiVersion: camel.apache.org/v1alpha1
+kind: KameletBinding
+metadata:
+  name: kafka-to-sqlserver
+spec:
+  integration:
+    dependencies:
+    - "mvn:com.microsoft.sqlserver:mssql-jdbc:9.2.1.jre11"
+  source:
+    ref:
+      kind: Kamelet
+      apiVersion: camel.apache.org/v1alpha1
+      name: kafka-not-secured-source
+    properties:
+      brokers: 'my-cluster-kafka-bootstrap:9092'
+      topic: 'test-topic-1'
+  sink:
+    ref:
+      kind: Kamelet
+      apiVersion: camel.apache.org/v1alpha1
+      name: sqlserver-sink
+    properties:
+      serverName: 172.17.0.10
+      username: sa
+      password: Password!
+      query: 'INSERT INTO master.dbo.accounts (user_id,username,city) VALUES (:#user_id,:#username,:#city)'
+      port: 1433
+      databaseName: master
