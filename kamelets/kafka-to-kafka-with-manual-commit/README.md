@@ -8,9 +8,9 @@
 
 - Run the following commands
 
-  - kubectl apply -f log-sink.kamelet.yaml -n kafka
-  - kubectl apply -f flow-binding.yaml -n kafka
+      kubectl apply -f log-sink.kamelet.yaml -n kafka
+      kubectl apply -f flow-binding.yaml -n kafka
 
 - Check logs
 
-kamel logs kafka-to-kafka-with-manual-commit -n kafka
+      kamel logs kafka-to-kafka-with-manual-commit -n kafka
