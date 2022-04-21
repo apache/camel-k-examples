@@ -38,7 +38,15 @@ All examples need at least the following CLI tools installed on your system:
 - `kubectl`: the Kubernetes default CLI tool that can be downloaded from the [Kubernetes releases page](https://github.com/kubernetes/kubernetes/releases).
 - `kamel`: the Apache Camel K CLI that can be downloaded from the [Camel K release page](https://github.com/apache/camel-k/releases).
 
-## Examples
+## Generic Examples
+
+We are providing also a folder containing multiple generic examples in [Generic Examples](./generic-examples) folder.
+
+## Kamelets
+
+In the [Kamelets](./kamelets) folder, you'll get a set of examples based on Kamelets.
+
+## Custom Examples
 
 Examples are contained in directories ordered by level of difficulty.
 
