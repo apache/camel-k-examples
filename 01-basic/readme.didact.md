@@ -200,9 +200,9 @@ The `Routing.java` file shows how to inject properties into the routes via prope
 To run the integration, we should link the integration to the property file providing configuration for it:
 
 ```
-kamel run Routing.java --property-file routing.properties --dev
+kamel run Routing.java --property file:./routing.properties --dev
 ```
-([^ execute](didact://?commandId=vscode.didact.sendNamedTerminalAString&text=camelTerm$$kamel%20run%20Routing.java%20--property-file%20routing.properties%20--dev&completion=Run%20Routing.java%20integration. "Opens a new terminal and sends the command above"){.didact})
+([^ execute](didact://?commandId=vscode.didact.sendNamedTerminalAString&text=camelTerm$$kamel%20run%20Routing.java%20--property%20file:./routing.properties%20--dev&completion=Run%20Routing.java%20integration. "Opens a new terminal and sends the command above"){.didact})
 
 Wait for the integration to be running (you should see the logs streaming in the terminal window).
 
@@ -225,10 +225,10 @@ For example, you can change the first endpoint (`timer:java?period=3000`) into t
 Now you can run the integration again:
 
 ```
-kamel run Routing.java --property-file routing.properties
+kamel run Routing.java --property file:./routing.properties
 ```
 
-([^ execute](didact://?commandId=vscode.didact.sendNamedTerminalAString&text=camelTerm$$kamel%20run%20Routing.java%20--property-file%20routing.properties&completion=Run%20Routing.java%20integration%20as%20CronJob. "Opens a new terminal and sends the command above"){.didact})
+([^ execute](didact://?commandId=vscode.didact.sendNamedTerminalAString&text=camelTerm$$kamel%20run%20Routing.java%20--property%20file:./routing.properties&completion=Run%20Routing.java%20integration%20as%20CronJob. "Opens a new terminal and sends the command above"){.didact})
 
 Now you'll see that Camel K has materialized a cron job:
 
@@ -272,9 +272,9 @@ customize how integrations are rendered.
 To disable the cron feature and use the deployment strategy, you can run the integration with:
 
 ```
-kamel run Routing.java --property-file routing.properties -t cron.enabled=false
+kamel run Routing.java --property file:./routing.properties -t cron.enabled=false
 ```
-([^ execute](didact://?commandId=vscode.didact.sendNamedTerminalAString&text=camelTerm$$kamel%20run%20Routing.java%20--property-file%20routing.properties%20-t%20cron.enabled=false&completion=Run%20Routing.java%20integration%20without%20CronJobs. "Opens a new terminal and sends the command above"){.didact})
+([^ execute](didact://?commandId=vscode.didact.sendNamedTerminalAString&text=camelTerm$$kamel%20run%20Routing.java%20--property%20file:./routing.properties%20-t%20cron.enabled=false&completion=Run%20Routing.java%20integration%20without%20CronJobs. "Opens a new terminal and sends the command above"){.didact})
 
 This will disable the cron trait and restore the classic behavior (always running pod).
 
