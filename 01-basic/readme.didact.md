@@ -185,7 +185,7 @@ or hit `ctrl+c` on the terminal window.
 > **Note:** Your IDE may provide an "Apache Camel K Integrations" panel where you can see the list of running integrations and also open a window to display the logs.
 
 
-## 2. Applying configuration and routing
+## 3. Applying configuration and routing
 
 The second example is a bit more complex as it shows how to configure the integration using external properties and 
 also a simple content-based router.
@@ -216,7 +216,7 @@ or hit `ctrl+c` on the terminal window.
 
 This will also terminate the execution of the integration.
 
-## 3. Running integrations as Kubernetes CronJobs
+## 4. Running integrations as Kubernetes CronJobs
 
 The previous example can be automatically deployed as a Kubernetes CronJob if the delay between executions is changed into a value that can be expressed by a cron tab expression.
 
@@ -292,7 +292,7 @@ or hit `ctrl+c` on the terminal window.
 
 You can continue to hack on the examples.
 
-## 4. Uninstall
+## 5. Uninstall
 
 To cleanup everything, execute the following command:
 
