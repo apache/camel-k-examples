@@ -19,7 +19,7 @@
 //
 // To run this integrations use:
 //
-//     kamel run -e BROKER_URL=event-bus-amqp-0-svc.messaging.svc.cluster.local -d camel-amqp examples/amqp.groovy
+//     kamel run -e BROKER_URL=<service-name>.<namespace>.svc.cluster.local -d camel-amqp amqp.groovy
 //
 
 camel {

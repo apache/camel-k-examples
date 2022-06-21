@@ -27,6 +27,6 @@ public class AmqpConnectionBeanProducer extends org.apache.camel.builder.RouteBu
         from("timer:foo?period=1000")
             .setBody()
                 .simple("Hello Camel K")
-            .to("amqp:queue:example?exchangePattern=InOnly")
+            .to("amqp:queue:example?exchangePattern=InOnly");
     }
 }

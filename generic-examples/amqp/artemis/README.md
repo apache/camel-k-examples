@@ -4,7 +4,8 @@ This is a very simple example to show how to create a JMS/AMQP broker. **Note**,
 
 ## Create a Kubernetes Deployment
 
-You can [install ActiveMQ Artemis on Kubernetes](https://artemiscloud.io/blog/using_operator/) thanks to ArtemisCloud.io. It would be enough to execute step 1, 2 and 3 of the linked blog post.
+You can [install ActiveMQ Artemis Operator on Kubernetes](https://artemiscloud.io/docs/tutorials/using_operator/) thanks to ArtemisCloud.io. It would be enough to execute steps 1 and 2 of the linked tutorial post. \
+**Note:** Openshift environments may require some adjustments, see [Installing the AMQ Broker Operator](https://access.redhat.com/documentation/en-us/red_hat_amq/7.4/html/deploying_amq_broker_on_openshift_container_platform/broker-operator-broker-ocp#install-broker-operator-broker-ocp)
 
 ## Create an AMQP broker instance
 
