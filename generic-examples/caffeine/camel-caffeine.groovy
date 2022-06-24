@@ -19,7 +19,7 @@
 //
 // To run this integration use:
 //
-//     kamel run groovy examples/camel-caffeine.groovy
+//     kamel run camel-caffeine.groovy
 //
 
 import com.github.benmanes.caffeine.cache.Caffeine
@@ -34,26 +34,26 @@ from('timer:tick')
     it.in.headers['CamelCaffeineAction'] = 'PUT'
     it.in.headers['CamelCaffeineKey'] = 1
   }
-  .toF('caffeine-cache://%s?cache=#caffeineCache', 'test')
+  .toF('caffeine-cache://%s', 'caffeineCache')
   .log('Result of Action ${header.CamelCaffeineAction} with key ${header.CamelCaffeineKey} is: ${body}')
   .setBody().constant(null)
   .process {
     it.in.headers['CamelCaffeineAction'] = 'GET'
     it.in.headers['CamelCaffeineKey'] = 1
   }
-  .toF('caffeine-cache://%s?cache=#caffeineCache', 'test')
+  .toF('caffeine-cache://%s', 'caffeineCache')
   .log('Result of Action ${header.CamelCaffeineAction} with key ${header.CamelCaffeineKey} is: ${body}')
   .setBody().constant(null)
   .process {
     it.in.headers['CamelCaffeineAction'] = 'INVALIDATE'
     it.in.headers['CamelCaffeineKey'] = 1
   }
-  .toF('caffeine-cache://%s?cache=#caffeineCache', 'test')
+  .toF('caffeine-cache://%s', 'caffeineCache')
   .log('Invalidating entry with key ${header.CamelCaffeineKey}')
   .setBody().constant(null)
   .process {
     it.in.headers['CamelCaffeineAction'] = 'GET'
     it.in.headers['CamelCaffeineKey'] = 1
   }
-  .toF('caffeine-cache://%s?cache=#caffeineCache', 'test')
+  .toF('caffeine-cache://%s', 'caffeineCache')
   .log('The Action ${header.CamelCaffeineAction} with key ${header.CamelCaffeineKey} has result? ${header.CamelCaffeineActionHasResult}');
