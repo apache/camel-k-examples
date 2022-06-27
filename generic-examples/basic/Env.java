@@ -25,7 +25,7 @@ import org.apache.camel.builder.RouteBuilder;
 public class Env extends RouteBuilder {
   @Override
   public void configure() throws Exception {
-	  from("timer:tick")
+    from("timer:tick")
         .log("${env:MY_ENV_VAR}");
   }
 }
