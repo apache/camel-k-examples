@@ -20,7 +20,7 @@
 //                                          -p quarkus.datasource.camel.jdbc.url=jdbc:postgresql://postgres:5432/test 
 //                                          -p quarkus.datasource.camel.username=postgresadmin 
 //                                          -p quarkus.datasource.camel.password=admin123 
-//                                          -d mvn:io.quarkus:quarkus-jdbc-postgresql:1.13.7.Final
+//                                          -d mvn:io.quarkus:quarkus-jdbc-postgresql:2.10.0.Final
 // 
 // Alternatively, you can bundle your credentials as a secret properties file:
 //
@@ -29,17 +29,17 @@
 // kamel run PostgresDBAutoDatasource.java --dev 
 //                                          --build-property quarkus.datasource.camel.db-kind=postgresql 
 //                                          --config secret:my-datasource
-//                                          -d mvn:io.quarkus:quarkus-jdbc-postgresql:1.13.7.Final
+//                                          -d mvn:io.quarkus:quarkus-jdbc-postgresql:2.10.0.Final
 
 import org.apache.camel.builder.RouteBuilder;
 
 public class PostgresDBAutoDatasource extends RouteBuilder {
   @Override
   public void configure() throws Exception {
-   from("timer://foo?period=10000")
-   .setBody(constant("select * from test"))
-   .to("jdbc:camel")
-   .to("log:info");
+    from("timer://foo?period=10000")
+        .setBody(constant("SELECT * FROM test"))
+        .to("jdbc:camel")
+        .to("log:info");
   }
 
 }
