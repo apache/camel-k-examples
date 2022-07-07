@@ -1,6 +1,15 @@
-# Jitpack Camel K examples
+# Using Jitpack in Camel K example
 
-Find useful examples about how to use Jitpack in a Camel K integration.
+This example demonstrates how to use Jitpack in a Camel K integration.
+
+You can find more information about Apache Camel and Apache Camel K on the [official Camel website](https://camel.apache.org).
+
+## Before you begin
+
+Read the general instructions in the [root README.md file](/README.md) for setting up your environment and the Kubernetes cluster before looking at this example.
+
+Make sure you've read the [installation instructions](https://camel.apache.org/camel-k/latest/installation/installation.html) for your specific
+cluster before starting the example.
 
 ## How to package a dependency
 
@@ -24,16 +33,20 @@ public class Jitpack extends RouteBuilder {
 }
 ```
 
-Once done, you must just reference the project in `kamel run -d` option, ie `-d github:squakez/samplejp`.
+Once done, you just reference the project (dependency) in `kamel run -d` option, ie `-d github:squakez/samplejp`.
+
+## Running the Example
 
 ### Package the default branch (main)
 
-You can choose to use the default dependency without specifying a tag or branch, that will fetch the source code on `main` branch:
+You can choose to use the default dependency without specifying a tag or branch. That will fetch the source code on `main` branch:
 ```
 kamel run Jitpack.java --dev -d github:squakez/samplejp
-
+```
+Running the above command, should log `HELLO` to the terminal every 2 seconds:
+```
 ...
-[1] 2021-11-23 16:00:59,305 INFO  [info] (Camel (camel-1) thread #0 - timer://tick) Exchange[ExchangePattern: InOnly, BodyType: String, Body: HELLO]
+[1] 2022-07-06 22:45:12,763 INFO  [info] (Camel (camel-1) thread #1 - timer://tick) Exchange[ExchangePattern: InOnly, BodyType: String, Body: HELLO]
 ...
 ```
 
@@ -42,9 +55,12 @@ kamel run Jitpack.java --dev -d github:squakez/samplejp
 You can choose to compile the source code stored on a given branch, ie, on `1.0.0` branch:
 ```
 kamel run Jitpack.java --dev -d github:squakez/samplejp:1.0.0-SNAPSHOT
+```
+Executing the above command, should log `v1.0.0-SNAPSHOT:HELLO` to the terminal every 2 seconds:
 
+```
 ...
-[1] 2021-11-23 16:04:30,840 INFO  [info] (Camel (camel-1) thread #0 - timer://tick) Exchange[ExchangePattern: InOnly, BodyType: String, Body: v1.0.0-SNAPSHOT:HELLO]
+[1] 2022-07-06 22:47:44,867 INFO  [info] (Camel (camel-1) thread #1 - timer://tick) Exchange[ExchangePattern: InOnly, BodyType: String, Body: v1.0.0-SNAPSHOT:HELLO]
 ...
 ```
 ### Package a fixed release tagged
@@ -52,8 +68,10 @@ kamel run Jitpack.java --dev -d github:squakez/samplejp:1.0.0-SNAPSHOT
 You can also choose to package the source code released with a `tag`, ie `v1.0`:
 ```
 kamel run Jitpack.java --dev -d github:squakez/samplejp:v1.0
-
+```
+Running the command above should log `v1.0.0:HELLO` to the terminal every 2 seconds:
+```
 ...
-[1] 2021-11-23 16:01:49,409 INFO  [info] (Camel (camel-1) thread #0 - timer://tick) Exchange[ExchangePattern: InOnly, BodyType: String, Body: v1.0.0:HELLO]
+[1] 2022-07-06 22:51:47,466 INFO  [info] (Camel (camel-1) thread #1 - timer://tick) Exchange[ExchangePattern: InOnly, BodyType: String, Body: v1.0.0:HELLO]
 ...
 ```
