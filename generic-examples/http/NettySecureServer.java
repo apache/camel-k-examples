@@ -15,9 +15,19 @@
  * limitations under the License.
  */
 
-// kamel run NettySecureServer.java --resource file:KeyStore.jks@/etc/ssl/keystore.jks 
+// Generate keystore.jks and truststore.jks (for this example, keystore and truststore password = changeit):
+//
+// keytool -genkeypair -alias EntryName -keyalg RSA -keysize 2048 -keystore keystore.jks
+// keytool -exportcert -alias EntryName -keystore keystore.jks -rfc -file public.cert
+// keytool -import -alias EntryName -file public.cert -storetype JKS -keystore truststore.jks
+
+// Run the integration:
+//
+// kamel run NettySecureServer.java --resource file:keystore.jks@/etc/ssl/keystore.jks 
 //                                  --resource file:truststore.jks@/etc/ssl/truststore.jks -t container.port=8443 --dev
-// 
+
+// Test
+//
 // recover the service location. If you're running on minikube, "minikube service netty-secure-server --url=true --https=true"
 // curl https://<service-location>/hello
 //
@@ -27,29 +37,29 @@ import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.support.jsse.*;
 
 public class NettySecureServer extends RouteBuilder {
-  @Override
-  public void configure() throws Exception {
-    registerSslContextParameter();
-    from("netty-http:https://0.0.0.0:8443/hello?sslContextParameters=#sslContextParameters&ssl=true")
-      .transform().constant("Hello Secure World");
-  }
+   @Override
+   public void configure() throws Exception {
+      registerSslContextParameter();
+      from("netty-http:https://0.0.0.0:8443/hello?sslContextParameters=#sslContextParameters&ssl=true")
+            .transform().constant("Hello Secure World");
+   }
 
-  private void registerSslContextParameter() throws Exception {
-    KeyStoreParameters ksp = new KeyStoreParameters();
-       ksp.setResource("/etc/ssl/keystore.jks");
-       ksp.setPassword("changeit");
-    KeyManagersParameters kmp = new KeyManagersParameters();
-       kmp.setKeyPassword("changeit");
-       kmp.setKeyStore(ksp);
-    KeyStoreParameters tsp = new KeyStoreParameters();
-       tsp.setResource("/etc/ssl/truststore.jks");
-       tsp.setPassword("changeit");
-    TrustManagersParameters tmp = new TrustManagersParameters();
-       tmp.setKeyStore(tsp);
-    SSLContextParameters sslContextParameters = new SSLContextParameters();
-    sslContextParameters.setKeyManagers(kmp);
-    sslContextParameters.setTrustManagers(tmp);
+   private void registerSslContextParameter() throws Exception {
+      KeyStoreParameters ksp = new KeyStoreParameters();
+      ksp.setResource("/etc/ssl/keystore.jks");
+      ksp.setPassword("changeit");
+      KeyManagersParameters kmp = new KeyManagersParameters();
+      kmp.setKeyPassword("changeit");
+      kmp.setKeyStore(ksp);
+      KeyStoreParameters tsp = new KeyStoreParameters();
+      tsp.setResource("/etc/ssl/truststore.jks");
+      tsp.setPassword("changeit");
+      TrustManagersParameters tmp = new TrustManagersParameters();
+      tmp.setKeyStore(tsp);
+      SSLContextParameters sslContextParameters = new SSLContextParameters();
+      sslContextParameters.setKeyManagers(kmp);
+      sslContextParameters.setTrustManagers(tmp);
 
-    this.getContext().getRegistry().bind("sslContextParameters", sslContextParameters);
- }
+      this.getContext().getRegistry().bind("sslContextParameters", sslContextParameters);
+   }
 }
