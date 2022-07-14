@@ -15,8 +15,12 @@
  * limitations under the License.
  */
 
+// Run integration
+//
 // kamel run PlatformHttpServer.java --dev -t service.enabled=true
-// 
+
+// Test
+//
 // recover the service location. If you're running on minikube, minikube service platform-http-server --url=true
 // curl -H "name:World" http://<service-location>/hello
 //

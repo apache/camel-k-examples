@@ -15,9 +15,9 @@
  * limitations under the License.
  */
 
-// Self signed certificate generation:
+// Private key and Self signed certificate generation:
 //
-// openssl genrsa -out server.key 2048
+// openssl genpkey -algorithm RSA -out server.key
 // openssl req -new -key server.key -out server.csr
 // openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
 
@@ -26,9 +26,9 @@
 
 // Integration execution
 //
-// kamel run PlatformHttpsServer.java -p quarkus.http.ssl.certificate.file=/etc/ssl/my-self-signed-ssl/server.crt \
-//                                    -p quarkus.http.ssl.certificate.key-file=/etc/ssl/my-self-signed-ssl/server.key \ 
-//                                    --resource secret:my-self-signed-ssl@/etc/ssl/my-self-signed-ssl \
+// kamel run PlatformHttpsServer.java -p quarkus.http.ssl.certificate.file=/etc/ssl/my-self-signed-ssl/server.crt
+//                                    -p quarkus.http.ssl.certificate.key-file=/etc/ssl/my-self-signed-ssl/server.key
+//                                    --resource secret:my-self-signed-ssl@/etc/ssl/my-self-signed-ssl
 //                                    -t container.port=8443 --dev
 
 // Test
