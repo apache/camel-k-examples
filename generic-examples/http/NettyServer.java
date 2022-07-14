@@ -15,8 +15,12 @@
  * limitations under the License.
  */
 
+// Run integration
+//
 // kamel run NettyServer.java --dev
-// 
+
+// Test
+//
 // recover the service location. If you're running on minikube, minikube service netty-server --url=true
 // curl http://<service-location>/hello
 //
@@ -27,6 +31,6 @@ public class NettyServer extends RouteBuilder {
   @Override
   public void configure() throws Exception {
     from("netty-http:http://0.0.0.0:8080/hello")
-      .transform().constant("Hello World");
+        .transform().constant("Hello World");
   }
 }
