@@ -29,7 +29,7 @@
 // Test
 //
 // recover the service location. If you're running on minikube, "minikube service netty-secure-server --url=true --https=true"
-// curl https://<service-location>/hello
+// curl -k https://<service-location>/hello
 //
 
 import org.apache.camel.builder.RouteBuilder;
