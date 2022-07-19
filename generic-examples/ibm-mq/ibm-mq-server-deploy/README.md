@@ -1,4 +1,4 @@
-# How to deploy a IBM MQ Server to Kubernetes cluster
+# How to deploy an IBM MQ Server to a Kubernetes cluster
 
 This is a very simple example to show how to install an IBM MQ Server. **Note**, this is not ready for any production purpose.
 
