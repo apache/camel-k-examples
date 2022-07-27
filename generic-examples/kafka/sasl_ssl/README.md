@@ -1,14 +1,16 @@
 # Kafka Camel K SASL SSL example
 
-This example shows how Camel K can be used to connect to a generic Kafka broker using SASL SSL authentication mechanism. Edit the `application` properties file with the proper values to be able to authenticate a Kafka Broker and use any Topic.
+This example shows how Camel K can be used to connect to a generic Kafka broker that uses `SSL` and `SASL`.
 
 ## Prerequisite
 
-You have a Kafka broker available on the cluster, or anywhere else accessible from the cluster. You will need to edit the `application.properties` file setting a "kafka broker", a "SASL username" and a "SASL password". 
+- A Kafka broker configured to use SSL and SASL for encryption and authentication respectively. It should use the `SASL PLAIN` authentication mechanism in order to use this example. 
+- You will also need the kafka bootstrap URL and user/service-account credentials with access permissions to topic . You will need to edit the `application.properties` file, setting `camel.component.kafka.brokers` to the kafka bootstrap server URL; setting `username` to the SASL username or service-account-ID; and setting `password` to the SASL password or service-account-secret. 
+- A kafka topic named `test` in the broker.
 
 ## Secret Configuration
 
-For convenience create a secret to contain the sensitive properties in the `application.properties` file:
+For convenience, create a secret to contain the sensitive properties in the `application.properties` file:
 
 ```
 kubectl create secret generic kafka-props --from-file application.properties
