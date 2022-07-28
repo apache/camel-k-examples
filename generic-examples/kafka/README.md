@@ -28,7 +28,7 @@ For a simple use case without client authentication, continue with this guide.
 To run this example, first set-up Kafka on your k8s cluster.
 A convenient way to do so is by using the Strimzi project. Visit https://strimzi.io/quickstarts/ for set-up instructions. For the instructions on the linked site, it will suffice to only apply the Strimzi installation file and provision the kafka cluster.
 
-IMPORTANT: The `kafka.host` value in `application.properties` needs to be set to the CLUSTER-IP address of the my-cluster-kafka-bootstrap service in the kafka namespace. To do this run:
+**IMPORTANT:** The `kafka.host` value in `application.properties` needs to be set to the CLUSTER-IP address of the my-cluster-kafka-bootstrap service in the kafka namespace. To do this run:
 ```
 kafkaip=`kubectl get svc/my-cluster-kafka-bootstrap -n kafka -ojsonpath="{.spec.clusterIP}"`; sed -i "/kafka\.host/s/<.*>/$kafkaip/g" application.properties
 ```
@@ -42,11 +42,11 @@ kubectl create configmap kafka.props  --from-file=application.properties
 
 Finally run this sample using the command:
 ```
-kamel run SampleKafkaConsumer.java --config=configmap:kafka.props --dev
+kamel run SampleKafkaConsumer.java --config=configmap:kafka.props
 ```
 
 To create messages to be read, use the producer command from the Strimzi page. Run in another terminal:
 ```
-kubectl -n kafka run kafka-producer -ti --image=quay.io/strimzi/kafka:0.30.0-kafka-3.2.0 --rm=true --restart=Never -- bin/kafka-console-producer.sh --bootstrap-server my-cluster-kafka-bootstrap:9092 --topic my-topic
+kubectl -n kafka run kafka-producer -ti --image=quay.io/strimzi/kafka:0.30.0-kafka-3.2.0 --rm --restart=Never -- bin/kafka-console-producer.sh --bootstrap-server my-cluster-kafka-bootstrap:9092 --topic my-topic
 ```
 You should see a prompt where you can type messages to be sent to the `my-topic` topic.
