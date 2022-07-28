@@ -27,7 +27,7 @@ public class SaslSSLKafkaProducer extends RouteBuilder {
     from("timer:foo")
         .routeId("FromTimer2Kafka")
         .setBody()
-        .simple("Message #${exchangeProperty.CamelTimerCounter}")
+            .simple("Message #${exchangeProperty.CamelTimerCounter}")
         .to("kafka:{{producer.topic}}")
         .log("Message correctly sent to the topic!");
   }
