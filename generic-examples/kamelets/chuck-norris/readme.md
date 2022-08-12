@@ -30,10 +30,8 @@ $ kamel log chuck
 
 ## Help and contributions
 
-If you hit any problem using Camel or have some feedback, then please
-https://camel.apache.org/community/support/[let us know].
+If you hit any problem using Camel or have some feedback, then please see the [community support page](https://camel.apache.org/community/support/) and let us know.
 
-We also love contributors, so
-https://camel.apache.org/community/contributing/[get involved] :-)
+We also love contributors, so [get involved](https://camel.apache.org/community/contributing/) :-)
 
 The Camel riders!
