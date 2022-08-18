@@ -59,7 +59,7 @@ spec:
     from:
       uri: kamelet:source
       steps:
-      # First step: send to the DLC for future processing
+      # First step: send to the DLC (dead letter channel) for future processing
       - to:
           uri: kafka:{{kafka-topic}}
           parameters:
