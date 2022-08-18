@@ -40,12 +40,12 @@ spec:
       parameters:
         period: "{{period}}"
       steps:
-      - set-body:
-          simple: "Producing message #${exchangeProperty.CamelTimerCounter}"
-      - choice:
-          when:
-          - simple: "${bodyAs(String)} contains 0"
-            steps:
-            - set-body:
-                simple: "${mandatoryBodyAs(Boolean)}"
-      - to: "kamelet:sink"                
+        - set-body:
+            simple: "Producing message #${exchangeProperty.CamelTimerCounter}"
+        - choice:
+            when:
+              - simple: "${bodyAs(String)} contains 0"
+                steps:
+                  - set-body:
+                      simple: "${mandatoryBodyAs(Boolean)}"
+        - to: "kamelet:sink"

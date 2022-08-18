@@ -24,9 +24,9 @@ metadata:
 spec:
   definition:
     title: "Regular Log Sink"
-    description: "Consume events from a channel"  
+    description: "Consume events from a channel"
   template:
     from:
       uri: kamelet:source
       steps:
-      - to: "log:ok"
+        - to: "log:ok"
