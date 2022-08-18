@@ -1,8 +1,8 @@
 # Kamelets Binding Error Handler example
-This example shows how to create a simple _source_ `Kamelet` which sends periodically events (and certain failures). The events are consumed by a log _sink_ in a `KameletBinding`. With the support of the `ErrorHandler` we will be able to redirect all errors to a `Sink` _error-handler_ `Kamelet` whose goal is to store the events in a `Kafka` topic and provide a nice log notifying us about the error happened.
+This example shows how to create a simple _source_ `Kamelet` which periodically sends events (and certain failures). The events are consumed by a log _sink_ in a `KameletBinding`. With the support of the `ErrorHandler`, we will redirect all errors to a `Sink` _error-handler_ `Kamelet` that first stores the events in a `Kafka` topic and then provide a nice log notifying us about the error that occurred.
 
 ## Incremental ID Source Kamelet
-First of all, you must install the _incremental-id-source_ Kamelet defined in `incremental-id-source.kamelet.yaml` file. This source will emit events every second with an autoincrement counter that will be forced to fail when the number 0 is caught. With this trick, we will simulate possible event faults.
+First of all, you must install the _incremental-id-source_ Kamelet defined in `incremental-id-source.kamelet.yaml` file. This source will emit events every second with an autoincrement counter that will be forced to fail when the number 0 is present in the data. With this trick, we will simulate possible event faults.
 ```
 $ kubectl apply -f incremental-id-source.kamelet.yaml
 ```
@@ -93,6 +93,7 @@ We can now create a `KameletBinding` which is started by the _incremental-id-sou
           name: error-handler
         properties:
           message: "ERROR!"
+          ...
       parameters:
         maximumRedeliveries: 1
         redeliveryDelay: 2000
@@ -111,7 +112,7 @@ As soon as the `Integration` starts, it will log the events on the `ok` log chan
 
 ### Recover the errors from DLC
 
-If you're curious to know what was going on in the DLC side, you can use the example you found in [kafka sasl ssl consumer](../kafka/sasl_ssl/):
+If you're curious to know what was going on in the DLC side, you can use the example you found in [kafka sasl ssl consumer](../../kafka/sasl_ssl/):
 
 ```
 kamel run --config secret:kafka-props SaslSSLKafkaConsumer.java --dev
