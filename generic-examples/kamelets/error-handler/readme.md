@@ -1,6 +1,9 @@
 # Kamelets Binding Error Handler example
 This example shows how to create a simple _source_ `Kamelet` which periodically sends events (and certain failures). The events are consumed by a log _sink_ in a `KameletBinding`. With the support of the `ErrorHandler`, we will redirect all errors to a `Sink` _error-handler_ `Kamelet` that first stores the events in a `Kafka` topic and then provide a nice log notifying us about the error that occurred.
 
+## Additional Requirements for running this example
+- A Kafka broker containing a Kafka Topic, and a Service Account with access to the topic. In this example, we shall name the Topic `my-first-test`.
+
 ## Incremental ID Source Kamelet
 First of all, you must install the _incremental-id-source_ Kamelet defined in `incremental-id-source.kamelet.yaml` file. This source will emit events every second with an autoincrement counter that will be forced to fail when the number 0 is present in the data. With this trick, we will simulate possible event faults.
 ```
