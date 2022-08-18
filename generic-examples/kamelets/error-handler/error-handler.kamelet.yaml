@@ -66,7 +66,7 @@ spec:
             brokers: "{{kafka-brokers}}"
             security-protocol: SASL_SSL
             sasl-mechanism: PLAIN
-            sasl-jaas-config: "org.apache.kafka.common.security.plain.PlainLoginModule required username={{kafka-service-account-id}} password={{kafka-service-account-secret}};"
+            sasl-jaas-config: "org.apache.kafka.common.security.plain.PlainLoginModule required username='{{kafka-service-account-id}}' password='{{kafka-service-account-secret}}';"
       # Log an error message to notify about the failure
       - set-body:
           constant: "{{log-message}} - worry not, the event is stored in the DLC"
