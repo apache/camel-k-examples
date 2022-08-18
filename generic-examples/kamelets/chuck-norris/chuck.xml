@@ -14,6 +14,6 @@
     limitations under the License.
 -->
 <route>
-  <from uri="kamelet:chuck-norris-source"/>
-  <log message="${body}"/>
+  <from uri="kamelet:chuck-norris-source" />
+  <log message="${body}" />
 </route>
