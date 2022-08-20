@@ -2,9 +2,12 @@
 
 This example shows how to create a simple timer `event source` and a log `event sink`. The timer events emitted are consumed by a simple logging connector which will print out those events.
 
+## Additional requirement for running this example
+- You should have Knative properly installed on your cluster ([see installation guide](https://knative.dev/docs/install/))
+
 ## Create events source and sink
 
-Let's start by creating the timer event source and log event sink as `kamelet`s.
+Let's start by creating the timer event source and log event sink as `kamelets`.
 ```
 $ kubectl apply -f timer-source.kamelet.yaml
 $ kubectl apply -f log-sink.kamelet.yaml
@@ -52,11 +55,11 @@ After a while you will be able to watch the event consumed by the underlying `lo
 ```
 $ kamel log log-event-sink
 
-[1] Monitoring pod log-event-sink-wjm9w-deployment-cf4f49655-xwq82
+[1] Monitoring pod log-event-sink-00001-deployment-7cf6d488c9-2nbx8
 ...
-[1] 2020-10-23 14:28:11,878 INFO  [sink] (vert.x-worker-thread-1) Exchange[ExchangePattern: InOnly, BodyType: byte[], Body: Hello world!]
-[1] 2020-10-23 14:28:11,877 INFO  [sink] (vert.x-worker-thread-0) Exchange[ExchangePattern: InOnly, BodyType: byte[], Body: Hello world!]
-[1] 2020-10-23 14:28:12,381 INFO  [sink] (vert.x-worker-thread-2) Exchange[ExchangePattern: InOnly, BodyType: byte[], Body: Hello world!]
-[1] 2020-10-23 14:28:13,276 INFO  [sink] (vert.x-worker-thread-3) Exchange[ExchangePattern: InOnly, BodyType: byte[], Body: Hello world!]
-[1] 2020-10-23 14:28:14,299 INFO  [sink] (vert.x-worker-thread-4) Exchange[ExchangePattern: InOnly, BodyType: byte[], Body: Hello world!]
+[1] 2022-08-20 08:56:01,284 INFO  [sink] (executor-thread-0) Exchange[ExchangePattern: InOnly, BodyType: byte[], Body: Hello world!]
+[1] 2022-08-20 08:56:02,284 INFO  [sink] (executor-thread-0) Exchange[ExchangePattern: InOnly, BodyType: byte[], Body: Hello world!]
+[1] 2022-08-20 08:56:03,285 INFO  [sink] (executor-thread-0) Exchange[ExchangePattern: InOnly, BodyType: byte[], Body: Hello world!]
+[1] 2022-08-20 08:56:04,286 INFO  [sink] (executor-thread-0) Exchange[ExchangePattern: InOnly, BodyType: byte[], Body: Hello world!]
+[1] 2022-08-20 08:56:05,285 INFO  [sink] (executor-thread-0) Exchange[ExchangePattern: InOnly, BodyType: byte[], Body: Hello world!]
 ```
