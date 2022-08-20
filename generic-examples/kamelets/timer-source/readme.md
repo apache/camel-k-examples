@@ -35,14 +35,14 @@ As soon as the integration starts, you will be able to log the timer source even
 ```
 $ kamel log usage
 
-[1] Monitoring pod usage-785d65897b-5jdvp
+[1] Monitoring pod usage-779f56b57dd-sqxrh
 ...
-[1] 2020-10-23 12:51:19,724 INFO  [route1] (Camel (camel-1) thread #0 - timer://tick) Hello Kamelets
-[1] 2020-10-23 12:51:20,681 INFO  [route1] (Camel (camel-1) thread #0 - timer://tick) Hello Kamelets
-[1] 2020-10-23 12:51:21,682 INFO  [route1] (Camel (camel-1) thread #0 - timer://tick) Hello Kamelets
-[1] 2020-10-23 12:51:22,681 INFO  [route1] (Camel (camel-1) thread #0 - timer://tick) Hello Kamelets
-[1] 2020-10-23 12:51:23,684 INFO  [route1] (Camel (camel-1) thread #0 - timer://tick) Hello Kamelets
-[1] 2020-10-23 12:51:24,682 INFO  [route1] (Camel (camel-1) thread #0 - timer://tick) Hello Kamelets
+[1] 2022-08-20 08:20:57,927 INFO  [route1] (Camel (camel-1) thread #1 - timer://tick) Hello Kamelets
+[1] 2022-08-20 08:20:58,927 INFO  [route1] (Camel (camel-1) thread #1 - timer://tick) Hello Kamelets
+[1] 2022-08-20 08:20:59,927 INFO  [route1] (Camel (camel-1) thread #1 - timer://tick) Hello Kamelets
+[1] 2022-08-20 08:21:00,928 INFO  [route1] (Camel (camel-1) thread #1 - timer://tick) Hello Kamelets
+[1] 2022-08-20 08:21:01,927 INFO  [route1] (Camel (camel-1) thread #1 - timer://tick) Hello Kamelets
+[1] 2022-08-20 08:21:02,928 INFO  [route1] (Camel (camel-1) thread #1 - timer://tick) Hello Kamelets
 ....
 ```
 ## Timer Source KameletBinding
