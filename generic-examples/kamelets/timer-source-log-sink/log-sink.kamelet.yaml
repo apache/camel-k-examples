@@ -31,4 +31,4 @@ spec:
     from:
       uri: kamelet:source
       steps:
-      - to: "log:sink"
+        - to: "log:sink"
