@@ -2,15 +2,15 @@
 This example shows how Camel K can be used to connect Knative building blocks to create awesome applications.
 
 A video version of this [demo is available on YouTube](https://youtu.be/btf_e2GniXM).
+**NB:** This video shows an outdated way of configuring the Camel Telegram component. The recent way uses a required `authorizationToken` query parameter (see the "Playing harder" section below).
 
-It's assumed that both Camel K and Knative are properly installed (including Knative Build, Serving and Eventing) into the cluster.
-Refer to the specific documentation to install and configure all components.
+It's assumed that both Camel K and Knative are properly installed (both Knative Serving and Eventing) into the cluster. If not, please refer to the [official documentation to install and configure the components](https://knative.dev/docs/install/).
 
 We're going to create two channels:
 - messages
 - words
 
-The first channel will contain phrases, while the second one will contains the single words contained in the phrases.
+The first channel will contain phrases, while the second one will contain the single words contained in the phrases.
 
 To create the channels (they use the in-memory channel provisioner):
 
@@ -103,7 +103,7 @@ And if you reinstall the feed again (`kamel run feed.groovy`), the other integra
 You can also play with different kind of feeds. E.g. the following simple feed can be used to bind messages from Telegram to the system:
 
 ```
-from('telegram:bots/<put-here-your-botfather-authorization>')
+from('telegram:bots?authorizationToken=<put-your-botfather-authorization-token-here>')
   .convertBodyTo(String.class)
   .to('log:info')
   .to('knative:channel/messages')
@@ -122,7 +122,7 @@ from('knative:channel/words')
 camel {
   components {
     slack {
-      webhookUrl '<put-here-your-slack-incoming-webhook-url>'
+      webhookUrl '<put-your-slack-incoming-webhook-url-here>'
     }
   }
 }
