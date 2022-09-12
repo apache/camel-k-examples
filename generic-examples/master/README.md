@@ -22,7 +22,7 @@ Run the integration:
 ```
 kamel run Master.java
 ```
-In this example, we will use the `stern` CLI tool to view the logs because it allows us to view multiple pod logs at the same time. <br>
+In this example, we will use the [stern](https://github.com/stern/stern) CLI tool to view the logs because it allows us to view multiple pod logs at the same time. <br>
 Since only a single instance is created, that becomes the leader and logs the routed message: _"This message is printed by a single pod, even if you increase the number of replicas!"_.
 ```
 stern master
