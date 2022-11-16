@@ -27,5 +27,5 @@ It's important to add the JAR file as resource to be compressed.
 ### Run this route
 To run this integration use the following command:
 ```bash
-kamel run ./src/main/org/apache/camel/OpenApiRoute.java
+kamel run ./src/main/java/org/apache/camel/OpenApiRoute.java
 ```
