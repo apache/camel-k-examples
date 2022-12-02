@@ -54,4 +54,5 @@ Traits configuration will be very helpful to fine tune your `Integration`. Here 
 | Type  |  Description | Link  |
 |---|---|---|
 | Container | How to customize with `container` trait| [see examples](./traits/container/)|
+| Health | How to customize with `health` trait| [see examples](./traits/health/)|
 | JVM | How to use `jvm` trait| [see examples](./traits/jvm/)|

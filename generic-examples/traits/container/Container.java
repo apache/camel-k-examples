@@ -15,28 +15,21 @@
  * limitations under the License.
  */
 
-// Generate a certificate for the integration (provide at least Country Name, can use defaults for rest)
-// openssl req -x509 -newkey rsa:4096 -keyout /tmp/integration-key.pem -out /tmp/integration-cert.pem -days 365 -nodes
-
-// Create a secret containing the generated certificate
-// kubectl create secret tls my-tls-secret --cert=/tmp/integration-cert.pem --key=/tmp/integration-key.pem
-
 // Run the integration
 /*
 kamel run \
-  --property quarkus.http.ssl.certificate.file=/etc/camel/conf.d/_secrets/my-tls-secret/tls.crt \
-  --property quarkus.http.ssl.certificate.key-file=/etc/camel/conf.d/_secrets/my-tls-secret/tls.key \
-  --config secret:my-tls-secret \
-  HttpsHealthChecks.java \
-  --trait container.port=8443 \
-  --trait container.probes-enabled=true \
-  --trait container.liveness-scheme=HTTPS \
-  --trait container.readiness-scheme=HTTPS
+  --name container \
+  Container.java \
+  --trait container.image-pull-policy=Always \
+  --trait container.request-cpu=0.005 \
+  --trait container.limit-cpu=0.2 \
+  --trait container.request-memory=100Mi \
+  --trait container.limit-memory=500Mi
 */
 
 import org.apache.camel.builder.RouteBuilder;
 
-public class HttpsHealthChecks extends RouteBuilder {
+public class Container extends RouteBuilder {
     @Override
     public void configure() throws Exception {
         from("timer:tick")
