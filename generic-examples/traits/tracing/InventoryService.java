@@ -36,29 +36,27 @@ public class InventoryService extends RouteBuilder {
     
     @Override
     public void configure() throws Exception {
-        
+        restConfiguration()
+            .enableCORS(true)
+            .bindingMode(RestBindingMode.json);
+
         rest()
-            .post("/notify/order")
+            .post("/notify/order/place")
                 .to("direct:notify");
 
         
-        JacksonDataFormat jacksonDataFormat = new JacksonDataFormat();
-        jacksonDataFormat.setUnmarshalType(Map.class);
         JacksonDataFormat invDataFormat = new JacksonDataFormat();
         invDataFormat.setUnmarshalType(InventoryNotification.class);
 
-        
         from("direct:notify")
+            .log("notifyorder--> ${body}")
             .setHeader(Exchange.CONTENT_TYPE, constant("application/json"))
-            .unmarshal(jacksonDataFormat)
-            .log("Inventory Notified ${body}")
             .bean(InventoryNotification.class, "getInventoryNotification(${body['orderId']},${body['itemId']},${body['quantity']} )")
             .marshal(invDataFormat)
+            .log("Inventory Notified ${body}")
             .convertBodyTo(String.class)
         ;
-
     }
-
 
     private static class InventoryNotification {
         private Integer orderId;
