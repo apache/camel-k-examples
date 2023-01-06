@@ -8,43 +8,81 @@ The Tracing trait can be used to automatically publish tracing information of in
 
 1. Enable Ingress addon in Minikube 
 
-    $ minikube addons enable ingress
+```sh
+$ minikube addons enable ingress
+```
 
 2. Add Minikube IP to /etc/hosts:
 
-    $ echo "$(minikube ip) example.com" | sudo tee -a /etc/hosts
+```sh
+$ echo "$(minikube ip) example.com" | sudo tee -a /etc/hosts
+```
 
-3. To install Jaeger, make sure the Jaeger operator is installed:
+3. Make sure Jaeger operator is available (see https://www.jaegertracing.io/docs for installation details)
 
-    $ kubetcl apply -f tracing/instance.yaml
+4. To use Jaeger, you can install the AllInOne image:
 
-4. Apply the Jaeger All-in-one Template:
+```sh
+$ kubetcl apply -f instance.yaml
+```
 
-    $ kubectl apply -f https://raw.githubusercontent.com/jaegertracing/jaeger-kubernetes/master/all-in-one/jaeger-all-in-one-template.yml
+5. Check the presence of the Jaeger instance
 
+```sh
+$ kubectl get jaeger
+NAME        STATUS    VERSION   STRATEGY   STORAGE   AGE
+instances   Running   1.40.0    allinone   memory    9m16s
+```
 
 ## Enable OpenTracing and trace a REST API call in Camel K Route 
 
 Tracing is an important approach for controlling and monitoring the experience of users. We  will be creating two distributed services: `Order` which is a rest service, and `Inventory` which is also a rest service.
 
-Quarkus OpenTracing extension in Camel automatically creates a Camel OpenTracingTracer and binds it to the Camel registry. Simply configure the properties to enable open tracing.
+Quarkus OpenTracing extension in Camel automatically creates a Camel OpenTracingTracer and binds it to the Camel registry. Simply declare the traits to enable open tracing. 
 
-See `quarkus.properties` for details.
 
-    kamel run InventoryService.java --name inventory -d mvn:org.apache.camel.quarkus:camel-quarkus-opentracing  -d camel-jackson --property-file quarkus.properties -t quarkus.enabled=true
+```sh
+kamel run InventoryService.java --name inventory \
+   -d camel-jackson \
+   -t tracing.enabled=true \
+   -t tracing.sampler-type=const \ 
+   -t tracing.sampler-param=1 
+```
+
+This will :
+* enable tracing  
+* automaticly discover of jaeger tracing endpoint
+* sample all traces
+
+To specify the endpoint use the following trait configuration `-t tracing.endpoint=http://instance-collector:14268/api/traces`
 
 Let's inject the Opentracing Tracer to the camel OrderService.java application. Let's start the inventory service. 
 
-See `customizers/OpentracingCustomizer.java` for more details. 
-
-    kamel run --name order OrderService.java customizers/OpentracingCustomizer.java -d camel-opentracing -d mvn:io.jaegertracing:jaeger-client:1.2.0 -d camel-jackson -d camel-undertow -d camel-swagger-java --property-file application.properties
+```sh
+kamel run OrderService.java --name order \
+   -d camel-jackson \
+   -t tracing.enabled=true \
+   -t tracing.sampler-type=const \ 
+   -t tracing.sampler-param=1
+```
 
 ## View the Jaeger UI 
 
-    minikube service jaeger-query --url
+If you installed the Jaeger Operator as describred, you should be able to access Jaeger interface on minikube : http://example.com.
 
 In the Jaeger interface we can see the details as:
 
 ![Jeager Tracing Interface](interface/jaegerInterface.png)
 
-You can make a few requests the REST Service with custom transaction values defined by curl. 
+You can make a few requests the REST Service with custom transaction values defined by curl, provided you made the `order` and `inventory` services available (using the **Service** trait is an easy way).
+
+```sh
+curl http://<order-service-external>/place -d '
+{
+    "orderId":58, 
+    "itemId":12, 
+    "quantity":1, 
+    "orderItemName":"awesome item",
+    "price":99
+}' -v -H "Content-Type: application/json"
+```
