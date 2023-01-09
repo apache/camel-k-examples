@@ -1,5 +1,8 @@
 # Camel K Tracing Trait
 
+> **Warning**
+> The Tracing Trait the trait has been deprecated in favor of the Telemetry Trait in camel-k 1.12+.
+
 In this section you will find examples about fine tuning your `Integration` using **Tracing** `trait` capability.
 
 The Tracing trait can be used to automatically publish tracing information of interactions to an OpenTracing compatible collector.
