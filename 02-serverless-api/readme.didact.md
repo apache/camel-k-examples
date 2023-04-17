@@ -168,7 +168,7 @@ To run the integration, you need to link it to the proper configuration, that de
 As alternative, to connect the integration to the **test Minio server** deployed before using the [test/MinioCustomizer.java](didact://?commandId=vscode.open&projectFilePath=02-serverless-api/test/MinioCustomizer.java "Opens the customizer file"){.didact} class:
 
 ```
-kamel run API.java --open-api openapi.yml --source test/MinioCustomizer.java --property file:test/minio.properties
+kamel run API.java --open-api file:openapi.yaml --source test/MinioCustomizer.java --property file:test/minio.properties
 ```
 ([^ execute](didact://?commandId=vscode.didact.sendNamedTerminalAString&text=camelTerm$$kamel%20run%20API.java%20--source%20test%2FMinioCustomizer.java%20--property%20file%3Atest%2Fminio.properties&completion=Integration%20run. "Opens a new terminal and sends the command above"){.didact})
 
@@ -177,7 +177,7 @@ kamel run API.java --open-api openapi.yml --source test/MinioCustomizer.java --p
 To connect the integration to the **AWS S3 service**:
 
 ```
-kamel run API.java --open-api openapi.yml --property file:s3.properties
+kamel run API.java --open-api file:openapi.yaml --property file:s3.properties
 ```
 ([^ execute](didact://?commandId=vscode.didact.sendNamedTerminalAString&text=camelTerm$$kamel%20run%20API.java%20--property%20file%3As3.properties&completion=Integration%20run. "Opens a new terminal and sends the command above"){.didact})
 
