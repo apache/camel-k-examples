@@ -12,7 +12,7 @@ spec:
       apiVersion: camel.apache.org/v1alpha1
       name: kafka-not-secured-source
     properties:
-      brokers: 'my-cluster-kafka-bootstrap:9092'
+      bootstrapServers: 'my-cluster-kafka-bootstrap:9092'
       topic: 'test-topic-1'
   sink:
     ref:

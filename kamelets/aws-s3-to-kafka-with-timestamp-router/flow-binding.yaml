@@ -36,5 +36,5 @@ spec:
       apiVersion: camel.apache.org/v1alpha1
       name: kafka-not-secured-sink
     properties:
-      brokers: 'my-cluster-kafka-bootstrap:9092'
+      bootstrapServers: 'my-cluster-kafka-bootstrap:9092'
       topic: 'test-topic'
