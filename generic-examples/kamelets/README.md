@@ -17,16 +17,16 @@ The examples are grouped into the following sub-directories:
 - [chuck-norris](./chuck-norris/): contains quick demonstration on how to use an already existing kamelet in a Camel application.
 - [error-handler](./error-handler/): contains examples on how to:
     - create event source kamelet and sink kamelet
-    - bind the source and sink kamelets using KameletBinding
+    - bind the source and sink kamelets using Pipe/KameletBinding
     - handle error arising from sending events
-- [kameletbindings](./kameletbindings/): contains more examples on KamletBindings and how to use `traits` to customize your integration.
-- [timer-source](./timer-source/): contains examples on how to: 
+- [pipes/kameletbindings](./kameletbindings/): contains more examples on Pipe/KameletBinding and how to use `traits` to customize your integration.
+- [timer-source](./timer-source/): contains examples on how to:
     - create and use a timer source kamelet
-    - bind a source kamelet to a Knative destination using KamletBinding
-- [timer-source-log-sink](./timer-source-log-sink/): 
+    - bind a source kamelet to a Knative destination using Pipe/KameletBinding
+- [timer-source-log-sink](./timer-source-log-sink/):
     - create and use a timer source kamelet
-    - bind a source kamelet to a Knative destination using KamletBinding
-    - create a log sink kamlet and bind it to the Knative destination using KamletBinding
+    - bind a source kamelet to a Knative destination using Pipe/KameletBinding
+    - create a log sink kamelet and bind it to the Knative destination using Pipe/KameletBinding
 - [user-config](./user-config/): contains examples on how to:
     - configure from Properties or Secrets an Integration using Kamelets
     - configure from Properties or Secrets a Pipe/KameletBinding
