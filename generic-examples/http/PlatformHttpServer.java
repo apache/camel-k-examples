@@ -17,7 +17,7 @@
 
 // Run integration
 //
-// kamel run PlatformHttpServer.java --dev -t service.enabled=true
+// kamel run PlatformHttpServer.java -t service.enabled=true -t service.type=NodePort --dev
 
 // Test
 //

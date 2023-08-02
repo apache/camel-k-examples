@@ -24,13 +24,13 @@ cluster before starting the example.
 ## Running the Examples
 
 ### Run the Integration in `NettySecureServer.java`:
-This integration requires a Keystore and a Truststore. Open [NettySecureServer.java](./NettySecureServer.java) to find instructions on how to generate a required `keystore.jks` 
-and `truststore.jks` file. For this example, keystore and trustore password is `changeit`
+This integration requires a Keystore and a Truststore. Open [NettySecureServer.java](./NettySecureServer.java) to find instructions on how to generate a required `keystore.jks` and `truststore.jks` file. For this example, keystore and trustore password is `changeit`
 
 Run the integration:
 ```
-kamel run NettySecureServer.java --resource file:keystore.jks@/etc/ssl/keystore.jks \
-    --resource file:truststore.jks@/etc/ssl/truststore.jks -t container.port=8443 --dev
+kamel run NettySecureServer.java -t mount.resources=secret:http-keystore/keystore.jks@/etc/ssl/keystore.jks \
+        -t mount.resources=secret:http-truststore/truststore.jks@/etc/ssl/truststore.jks \
+        -t container.port=8443 -t service.type=NodePort --dev
 ```
 Get the service location. If you're running on minikube, run `minikube service netty-secure-server --url=true --https=true` \
 Visit `https://<service-location>/hello`. You should see "Hello Secure World" displayed on the web page. \
