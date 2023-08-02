@@ -17,7 +17,7 @@
 
 // Run integration
 //
-// kamel run NettyServer.java --dev
+// kamel run NettyServer.java -t service.type=NodePor --dev
 
 // Test
 //

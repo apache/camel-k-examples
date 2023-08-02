@@ -21,10 +21,17 @@
 // keytool -exportcert -alias EntryName -keystore keystore.jks -rfc -file public.cert
 // keytool -import -alias EntryName -file public.cert -storetype JKS -keystore truststore.jks
 
+// Create the secrets associated with the stores:
+//
+// kubectl create secret generic http-keystore --from-file keystore.jks
+// kubectl create secret generic http-truststore --from-file truststore.jks
+
 // Run the integration:
 //
-// kamel run NettySecureServer.java --resource file:keystore.jks@/etc/ssl/keystore.jks 
-//                                  --resource file:truststore.jks@/etc/ssl/truststore.jks -t container.port=8443 --dev
+// kamel run NettySecureServer.java
+//        -t mount.resources=secret:http-keystore/keystore.jks@/etc/ssl/keystore.jks
+//        -t mount.resources=secret:http-truststore/truststore.jks@/etc/ssl/truststore.jks
+//        -t container.port=8443 -t service.type=NodePort --dev
 
 // Test
 //
