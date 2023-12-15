@@ -17,10 +17,11 @@
  */
 
 //
-//  kamel run --dev --name greetings --open-api greetings-api.json greetings.groovy
-// 
+// kubectl create configmap my-openapi --from-file=greetings-api.json
+// kamel run --dev --name greetings --open-api configmap:my-openapi greetings.groovy
+//
 
 from('direct:greeting-api')
-    .to('log:api?showAll=true&multiline=true') 
+    .to('log:api?showAll=true&multiline=true')
     .setBody()
         .simple('Hello from ${headers.name}')
