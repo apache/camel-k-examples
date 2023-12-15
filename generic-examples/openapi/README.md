@@ -7,7 +7,8 @@ Find useful examples about how to expose an Open API specification in a Camel K 
 Deploy the examples running
 
 ```
-kamel run --dev --name greetings --open-api file:greetings-api.json greetings.groovy
+kubectl create configmap my-openapi --from-file=greetings-api.json
+kamel run --dev --name greetings --open-api configmap:my-openapi greetings.groovy
 ```
 
 Then you can test by calling the hello endpoint, ie:

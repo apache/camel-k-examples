@@ -16,9 +16,11 @@
  * limitations under the License.
  */
 
+
 //
-//  kamel run --dev --name petstore --open-api file:petstore-api.yaml petstore.groovy
-// 
+// kubectl create configmap my-petstore-api --from-file=petstore-api.yaml
+// kamel run --dev --name petstore --open-api configmap:my-petstore-api petstore.groovy
+//
 
 from('direct:listPets')
     .log('listPets')
