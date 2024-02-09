@@ -176,7 +176,7 @@ kamel run API.java --open-api configmap:my-openapi --property file:test/minio.pr
 ```
 ([^ execute](didact://?commandId=vscode.didact.sendNamedTerminalAString&text=camelTerm$$kamel%20run%20API.java%20--property%20file%3Atest%2Fminio.properties&completion=Integration%20run. "Opens a new terminal and sends the command above"){.didact})
 
-In case you run on Minikube then you can't use `http://minio:9000` as your S3 endpoint in `minio.properties` as `EXTERNAL-IP` would be `<pending>` since Minikube doesn't support LoadBalancer services, so the service will never get an external IP. For this to work you can run Minikube service to get the URL for connection to use:
+In case you run on Minikube then you can't use `http://minio:9000` as your S3 endpoint in `minio.properties` because `EXTERNAL-IP` would be `<pending>` since Minikube doesn't support LoadBalancer services, so the service will never get an external IP. For this to work you can run Minikube service to get the URL for connection to use:
 
 ```
 $> minikube service -n camel-api minio
