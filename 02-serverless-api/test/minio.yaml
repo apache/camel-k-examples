@@ -20,16 +20,16 @@ spec:
       containers:
       - name: minio
         volumeMounts:
-        - name: data 
+        - name: data
           mountPath: "/data"
         image: minio/minio
         args:
         - server
         - /data
         env:
-        - name: MINIO_ACCESS_KEY
+        - name: MINIO_ROOT_USER
           value: minio
-        - name: MINIO_SECRET_KEY
+        - name: MINIO_ROOT_PASSWORD
           value: minio123
         ports:
         - containerPort: 9000
