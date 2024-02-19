@@ -47,7 +47,7 @@ You need the Apache Camel K CLI ("kamel") in order to access all Camel K feature
 
 **Knative installed on the cluster**
 
-The cluster also needs to have Knative installed and working. Refer to the [official Knative documentation](https://knative.dev/v0.15-docs/install/) for information on how to install it in your cluster.
+The cluster also needs to have Knative installed and working. Refer to the [official Knative documentation](https://knative.dev/docs/getting-started/quickstart-install/) for information on how to install it in your cluster.
 
 [Check if the Knative is installed](didact://?commandId=vscode.didact.requirementCheck&text=kservice-project-check$$kubectl%20api-resources%20--api-group=serving.knative.dev$$kservice%2Cksvc&completion=Verified%20Knative%20services%20installation. "Verifies if Knative is installed"){.didact}
 
@@ -176,7 +176,7 @@ kamel run API.java --open-api configmap:my-openapi --property file:test/minio.pr
 ```
 ([^ execute](didact://?commandId=vscode.didact.sendNamedTerminalAString&text=camelTerm$$kamel%20run%20API.java%20--property%20file%3Atest%2Fminio.properties&completion=Integration%20run. "Opens a new terminal and sends the command above"){.didact})
 
-In case you run on Minikube then you can't use `http://minio:9000` as your S3 endpoint in `minio.properties` because `EXTERNAL-IP` would be `<pending>` since Minikube doesn't support LoadBalancer services, so the service will never get an external IP. For this to work you can run Minikube service to get the URL for connection to use:
+In case you run on Minikube then you can't use `http://minio:9000` as your S3 endpoint in `minio.properties` because the `EXTERNAL-IP` of your load balancer service would be `<pending>`. For this to work you can run [Minikube service](https://minikube.sigs.k8s.io/docs/commands/service/) to get the URL for the connection to use:
 
 ```
 $> minikube service -n camel-api minio
