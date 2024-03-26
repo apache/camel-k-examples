@@ -13,6 +13,8 @@ kamel install
 kubectl apply -f lra-coordinator.yaml
 ```
 
+Note: if it does not works check another tag (like latest) for the `quay.io/jbosstm/lra-coordinator` image.
+
 * Start the three demo services
 ```
 kamel run -d camel:lra Payment.java
@@ -46,3 +48,5 @@ flight-7c8df48b88-6pzwt integration 2020-03-02 10:56:30.256 INFO  [XNIO-2 task-6
 flight-7c8df48b88-6pzwt integration 2020-03-02 10:56:35.150 INFO  [default-workqueue-3] route2 - Buying flight #19
 flight-7c8df48b88-6pzwt integration 2020-03-02 10:56:35.197 INFO  [XNIO-1 I/O-1] route2 - Payment for flight #19 done
 ```
+
+Warning: this example does not work with knative enabled on the integrations.
