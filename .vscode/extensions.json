@@ -1,6 +1,5 @@
 {
   "recommendations": [
-    "redhat.vscode-didact",
     "redhat.apache-camel-extension-pack"
   ]
 }

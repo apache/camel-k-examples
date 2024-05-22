@@ -16,7 +16,7 @@ cluster before starting the example.
 - [routes.yaml](./hello.xml): defines a route that every 5 secs, transforms the message content to uppercase and logs it.
 - [simple.js](./simple.js): logs message periodically, the `multiline` query parameter is set to true, thus each information is output on a newline
 - [hello.xml](./hello.xml): defines a route that logs a message to a logger very 3 seconds.
-- [simple.groovy](./simple.groovy): logs a message every second, the `showAll` query parameter is set to false, thus only a limited information is shown.
+- [simple.groovy](./simple.groovy): logs a message every second, the `showAll` query parameter is set to false, thus only limited information is shown.
 - [Sample.java](./Sample.java): defines a route that logs a message periodically.
 
 ## Running the Examples
