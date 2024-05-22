@@ -8,17 +8,29 @@ Deploy the examples running
 
 ```
 kubectl create configmap my-openapi --from-file=greetings-api.json
-kamel run --dev --name greetings --open-api configmap:my-openapi greetings.groovy
+kamel run --dev --name greetings --open-api configmap:my-openapi greetings.yaml
 ```
 
-Then you can test by calling the hello endpoint, ie:
+If on minikube, you can get the service endpoint address like this ...
 
 ```
-$ curl -i http://192.168.49.2:31373/camel/greetings/hello
+$ minikube service greetings
+Starting tunnel for service greetings.
+|-----------|-----------|-------------|------------------------|
+| NAMESPACE |   NAME    | TARGET PORT |          URL           |
+|-----------|-----------|-------------|------------------------|
+| default   | greetings |             | http://127.0.0.1:58512 |
+|-----------|-----------|-------------|------------------------|
+```
+
+You can then test that endpoint like this ...
+
+```
+$ curl -i http://127.0.0.1:58512/camel/greetings/hello
 HTTP/1.1 200 OK
 Accept: */*
 name: hello
-User-Agent: curl/7.68.0
+User-Agent: curl/8.6.0
 transfer-encoding: chunked
 
 Hello from hello

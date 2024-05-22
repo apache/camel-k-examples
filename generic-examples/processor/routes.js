@@ -14,24 +14,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-//
-// To run this integrations use:
-//
-//     kamel run examples/routes.js
-//
 const org_apache_camel_Processor = Java.type("org.apache.camel.Processor");
 const Processor = Java.extend(org_apache_camel_Processor);
-
-l = components.get('log');
-l.setExchangeFormatter(e => {
-    return "body=" + e.getIn().getBody() + ", headers=" + e.getIn().getHeaders()
-})
 
 from('timer:js?period=1000')
     .routeId('js')
     .setBody()
-        .simple('Hello Camel K')
+        .constant('Hello Camel K')
     .process(new Processor(e => {
         e.getIn().setHeader('RandomValue', Math.floor((Math.random() * 100) + 1))
     }))
+    .setBody()
+        .simple('${body} - ${header.RandomValue}')
     .to('log:info');

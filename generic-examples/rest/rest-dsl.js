@@ -1,4 +1,5 @@
 // camel-k: language=js
+
 // Licensed to the Apache Software Foundation (ASF) under one or more
 // contributor license agreements.  See the NOTICE file distributed with
 // this work for additional information regarding copyright ownership.
@@ -14,16 +15,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-//
-// To run this integrations use:
-//
-//     kamel run --name=withrest examples/routes-rest.js
-//
-
-rest('/say/hello')
+rest('/hello')
     .produces("text/plain")
     .get()
-    .to('direct:sayHello');
+    .to('direct:hello');
 
-from('direct:sayHello')
+from('direct:hello')
     .transform().constant("Hello World");

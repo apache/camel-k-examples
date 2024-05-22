@@ -1,4 +1,4 @@
-// camel-k: dependency=mvn:com.google.guava:guava:28.0-jre
+// camel-k: language=java
 
 /*
  * Licensed to the Apache Software Foundation (ASF) under one or more
@@ -16,6 +16,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+// camel-k: dependency=mvn:com.google.guava:guava:28.0-jre
 
 import org.apache.camel.builder.RouteBuilder;
 
