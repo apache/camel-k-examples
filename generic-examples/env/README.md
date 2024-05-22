@@ -19,6 +19,6 @@ cluster before starting the example.
 
 To both set the `MY_ENV_VAR` env variable to `hello world` and run the integration, execute the following:
 ```
-kamel run --env MY_ENV_VAR="hello world" Env.java --dev
+kamel run --dev --env MY_ENV_VAR="hello world" Env.java
 ```
 You should see `hello world` logged to the terminal every second

@@ -16,12 +16,6 @@
  * limitations under the License.
  */
 
-//
-// To run this integration use:
-//
-//     kamel run kotlin examples/kotlin-routes.kts
-//
-
 val rnd = java.util.Random()
 
 from("timer:kotlin?period=1000")

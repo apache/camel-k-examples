@@ -15,11 +15,6 @@
  * limitations under the License.
  */
 
-//
-// To run this integrations use:
-//
-//     kamel run examples/RestDSL.java
-//
 import org.apache.camel.Exchange;
 
 public class RestDSL extends org.apache.camel.builder.RouteBuilder {

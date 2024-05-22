@@ -41,7 +41,7 @@ Once done, you just reference the project (dependency) in `kamel run -d` option,
 
 You can choose to use the default dependency without specifying a tag or branch. That will fetch the source code on `main` branch:
 ```
-kamel run Jitpack.java --dev -d github:squakez/samplejp
+kamel run --dev -d github:squakez/samplejp Jitpack.java
 ```
 Running the above command, should log `HELLO` to the terminal every 2 seconds:
 ```
@@ -54,7 +54,7 @@ Running the above command, should log `HELLO` to the terminal every 2 seconds:
 
 You can choose to compile the source code stored on a given branch, ie, on `1.0.0` branch:
 ```
-kamel run Jitpack.java --dev -d github:squakez/samplejp:1.0.0-SNAPSHOT
+kamel run --dev -d github:squakez/samplejp:1.0.0-SNAPSHOT Jitpack.java
 ```
 Executing the above command, should log `v1.0.0-SNAPSHOT:HELLO` to the terminal every 2 seconds:
 
@@ -67,7 +67,7 @@ Executing the above command, should log `v1.0.0-SNAPSHOT:HELLO` to the terminal 
 
 You can also choose to package the source code released with a `tag`, ie `v1.0`:
 ```
-kamel run Jitpack.java --dev -d github:squakez/samplejp:v1.0
+kamel run --dev -d github:squakez/samplejp:v1.0 Jitpack.java
 ```
 Running the command above should log `v1.0.0:HELLO` to the terminal every 2 seconds:
 ```

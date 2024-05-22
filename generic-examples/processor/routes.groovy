@@ -19,26 +19,6 @@
 import java.util.concurrent.ThreadLocalRandom
 
 //
-// To run this integration use:
-//
-//     kamel run examples/routes.groovy
-//
-
-camel {
-
-    //
-    // configure components
-    //
-    components {
-        log {
-            formatter {
-                'body: ' + it.in.body + ', random-value: ' + it.in.headers['RandomValue']
-            }
-        }
-    }
-}
-
-//
 // configure beans
 //
 beans {
@@ -52,4 +32,6 @@ from('timer:groovy?period=1000')
     .setBody()
         .constant('Hello Camel K!')
     .process('myProcessor')
+    .setBody()
+        .simple('${body} - ${header.RandomValue}')
     .to('log:info')
