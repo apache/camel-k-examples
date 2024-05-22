@@ -55,8 +55,8 @@ kubectl create secret tls my-tls-secret --cert=/tmp/integration-cert.pem --key=/
 Run the integration
  ```sh
  kamel run \
-    --property quarkus.http.ssl.certificate.file=/etc/camel/conf.d/_secrets/my-tls-secret/tls.crt \
-    --property quarkus.http.ssl.certificate.key-file=/etc/camel/conf.d/_secrets/my-tls-secret/tls.key \
+    --property quarkus.http.ssl.certificate.files=/etc/camel/conf.d/_secrets/my-tls-secret/tls.crt \
+    --property quarkus.http.ssl.certificate.key-files=/etc/camel/conf.d/_secrets/my-tls-secret/tls.key \
     --config secret:my-tls-secret \
     --pod-template patch_probe.yaml \
     --name health \

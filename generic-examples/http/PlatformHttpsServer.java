@@ -26,8 +26,8 @@
 
 // Integration execution
 //
-// kamel run PlatformHttpsServer.java -p quarkus.http.ssl.certificate.file=/etc/ssl/my-self-signed-ssl/server.crt
-//                                    -p quarkus.http.ssl.certificate.key-file=/etc/ssl/my-self-signed-ssl/server.key
+// kamel run PlatformHttpsServer.java -p quarkus.http.ssl.certificate.files=/etc/ssl/my-self-signed-ssl/server.crt
+//                                    -p quarkus.http.ssl.certificate.key-files=/etc/ssl/my-self-signed-ssl/server.key
 //                                    --resource secret:my-self-signed-ssl@/etc/ssl/my-self-signed-ssl
 //                                    -t container.port=8443 -t service.type=NodePort --dev
 
