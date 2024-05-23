@@ -23,25 +23,19 @@ cluster before starting the example.
 - [`amqp.properties`](./amqp.properties) holds required credentials to connect to broker.
 
 ## Running the Example
+
 You should have an amqp broker running in a namespace, if not, see [how to install a JMS/AMQP Broker on Kubernetes](./artemis/)
 
-To create a secret for your credentials, run:
+To run an integration that sends/consumes message to amqp queue, run:
 ```
 kubectl create secret generic my-amqp --from-file=amqp.properties
+kamel run --dev --config secret:my-amqp amqp.yaml
 ```
 
-To run an integration that sends message to amqp queue, run:
-```
-kamel run AmqpConnectionBeanProducer.java --config secret:my-amqp
-```
-
-To consume messages from the amqp queue, run:
-```
-kamel run AmqpConnectionBeanConsumer.java --dev --config secret:my-amqp
-```
 The terminal should show the logged messages:
 ```console
-[1] 2022-06-21 15:44:46,513 INFO  [info] (Camel (camel-1) thread #1 - JmsConsumer[example]) Exchange[ExchangePattern: InOnly, BodyType: String, Body: Hello Camel K]
-[1] 2022-06-21 15:44:47,513 INFO  [info] (Camel (camel-1) thread #1 - JmsConsumer[example]) Exchange[ExchangePattern: InOnly, BodyType: String, Body: Hello Camel K]
-[1] 2022-06-21 15:44:48,517 INFO  [info] (Camel (camel-1) thread #1 - JmsConsumer[example]) Exchange[ExchangePattern: InOnly, BodyType: String, Body: Hello Camel K]
+[1] 2024-05-23 07:12:27,778 INFO  [org.apa.qpi.jms.JmsConnection] (AmqpProvider :(8):[amqp://my-amqp-service:5672]) Connection ID:e04a1ef1-d167-4aed-b525-6959666be4a8:8 connected to server: amqp://my-amqp-service:5672
+[1] 2024-05-23 07:12:27,788 INFO  [info] (Camel (camel-1) thread #1 - JmsConsumer[example]) Exchange[ExchangePattern: InOnly, BodyType: String, Body: Hello Camel K]
+[1] 2024-05-23 07:12:28,772 INFO  [org.apa.qpi.jms.JmsConnection] (AmqpProvider :(9):[amqp://my-amqp-service:5672]) Connection ID:34387545-ef55-429a-976f-a28cd2d5e038:9 connected to server: amqp://my-amqp-service:5672
+[1] 2024-05-23 07:12:28,783 INFO  [info] (Camel (camel-1) thread #1 - JmsConsumer[example]) Exchange[ExchangePattern: InOnly, BodyType: String, Body: Hello Camel K]
 ```

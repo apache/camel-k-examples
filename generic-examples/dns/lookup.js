@@ -14,12 +14,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-//
-// To run this integrations use:
-//
-//     kamel run lookup.js --dev
-//
-
 from('timer:dns?period=10000')
   .routeId('dns')
   .setHeader('dns.name', constant('gmail.com'))

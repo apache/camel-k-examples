@@ -12,6 +12,7 @@ Make sure you've read the [installation instructions](https://camel.apache.org/c
 cluster before starting the example.
 
 ## Additional Requirements for running the examples
+
 **A Kafka broker**: handles the storage and passing of messages.
 
 ## Authentication to Kafka
@@ -20,6 +21,7 @@ To use Kafka with authentication, we have a dedicated section to show [how to au
 For a simple use case without client authentication, continue with this guide.
 
 ## Understanding the example
+
 - [SampleKafkaConsumer.java](./SampleKafkaConsumer.java): contains a route that reads message from a kafka topic and logs the message
 - [application.properties](./application.properties): holds properties required to connect to kafka broker and read from topic.
 
@@ -30,19 +32,18 @@ A convenient way to do so is by using the Strimzi project. Visit https://strimzi
 
 **IMPORTANT:** The `kafka.host` value in `application.properties` needs to be set to the CLUSTER-IP address of the my-cluster-kafka-bootstrap service in the kafka namespace. To do this run:
 ```
-kafkaip=`kubectl get svc/my-cluster-kafka-bootstrap -n kafka -ojsonpath="{.spec.clusterIP}"`; sed -i "/kafka\.host/s/<.*>/$kafkaip/g" application.properties
+kafkaip=$(kubectl get svc/my-cluster-kafka-bootstrap -n kafka -ojsonpath="{.spec.clusterIP}")
+echo $kafkaip
 ```
 
 Create a configmap to contain the properties:
 ```
-kubectl create configmap kafka.props  --from-file=application.properties
+kubectl create configmap kafka.props --from-file application.properties
 ```
-
-
 
 Finally run this sample using the command:
 ```
-kamel run SampleKafkaConsumer.java --config=configmap:kafka.props
+kamel run --dev --config=configmap:kafka.props SampleKafkaConsumer.java
 ```
 
 To create messages to be read, use the producer command from the Strimzi page. Run in another terminal:
@@ -50,3 +51,5 @@ To create messages to be read, use the producer command from the Strimzi page. R
 kubectl -n kafka run kafka-producer -ti --image=quay.io/strimzi/kafka:0.30.0-kafka-3.2.0 --rm --restart=Never -- bin/kafka-console-producer.sh --bootstrap-server my-cluster-kafka-bootstrap:9092 --topic my-topic
 ```
 You should see a prompt where you can type messages to be sent to the `my-topic` topic.
+
+**TODO:** [[#99]](https://github.com/apache/camel-k-examples/issues/99) Add message producer route to kafka example 

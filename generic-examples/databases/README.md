@@ -20,16 +20,16 @@ cluster before starting the example.
 - [`datasource.properties`](./datasource.properties) holds your credentials for connecting to the database.
 
 ## Running the Example
+
 You should have a PostgreSQL instance running in a namespace. If not see [How to deploy a simple Postgres DB to a Kubernetes cluster](./postgres-deploy/)
 
-Bundle your credentials as a secret:
+Run the integration:
+
 ```
 kubectl create secret generic my-datasource --from-file=datasource.properties
-```
+kamel run --dev --config secret:my-datasource PostgresDBAutoDatasource.java
 
-Run the integration:
-```
-kamel run PostgresDBAutoDatasource.java --dev --build-property quarkus.datasource.camel.db-kind=postgresql --config secret:my-datasource -d mvn:io.quarkus:quarkus-jdbc-postgresql:2.10.0.Final
+kamel run --dev --config secret:my-datasource postgres-route.yaml
 ```
 
 If successful, the query result: `hello` and `world`, should be logged to the terminal every 10 seconds:
@@ -41,21 +41,22 @@ If successful, the query result: `hello` and `world`, should be logged to the te
 
 ## Multiple datasources example
 
-An additional example using multiple datasources with an in-memory H2 database is available as a standalone. It does not requires the PostgreSQL instance.
+An additional example using multiple datasources with an in-memory H2 database is available as a standalone integration. 
+It does not require the PostgreSQL instance.
 
 It shows how to configure and use multiple datasources.
 
 [`H2DBMultiDatasources.java`](./H2DBMultiDatasources.java) contains the integration code. It defines 2 datasources, with 3 routes:
 - initialise a table with each datasource only once
-- insert periodically datas via each datasource
-- queries periodically bot datasources and logs the result.
+- insert periodically data via each datasource
+- queries periodically both datasources and logs the result.
 
 You will find most of the configuration parameters inside the integration code.
 
-
 To run it you only need the following :
+
 ```
-kamel run H2DBMultiDatasources.java --dev
+kamel run --dev H2DBMultiDatasources.java
 ```
 
 If successful, the following should be logged to the terminal every 10 seconds:

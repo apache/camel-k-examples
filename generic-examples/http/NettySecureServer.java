@@ -26,19 +26,6 @@
 // kubectl create secret generic http-keystore --from-file keystore.jks
 // kubectl create secret generic http-truststore --from-file truststore.jks
 
-// Run the integration:
-//
-// kamel run NettySecureServer.java
-//        -t mount.resources=secret:http-keystore/keystore.jks@/etc/ssl/keystore.jks
-//        -t mount.resources=secret:http-truststore/truststore.jks@/etc/ssl/truststore.jks
-//        -t container.port=8443 -t service.type=NodePort --dev
-
-// Test
-//
-// recover the service location. If you're running on minikube, "minikube service netty-secure-server --url=true --https=true"
-// curl -k https://<service-location>/hello
-//
-
 import org.apache.camel.builder.RouteBuilder;
 
 import org.apache.camel.support.jsse.*;

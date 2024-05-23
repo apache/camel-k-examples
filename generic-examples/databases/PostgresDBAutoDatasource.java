@@ -15,21 +15,8 @@
  * limitations under the License.
  */
 
-// kamel run PostgresDBAutoDatasource.java --dev 
-//                                          --build-property quarkus.datasource.camel.db-kind=postgresql 
-//                                          -p quarkus.datasource.camel.jdbc.url=jdbc:postgresql://postgres:5432/test 
-//                                          -p quarkus.datasource.camel.username=postgresadmin 
-//                                          -p quarkus.datasource.camel.password=admin123 
-//                                          -d mvn:io.quarkus:quarkus-jdbc-postgresql:2.10.0.Final
-// 
-// Alternatively, you can bundle your credentials as a secret properties file:
-//
-// kubectl create secret generic my-datasource --from-file=datasource.properties
-// 
-// kamel run PostgresDBAutoDatasource.java --dev 
-//                                          --build-property quarkus.datasource.camel.db-kind=postgresql 
-//                                          --config secret:my-datasource
-//                                          -d mvn:io.quarkus:quarkus-jdbc-postgresql:2.10.0.Final
+// camel-k: build-property=quarkus.datasource.camel.db-kind=postgresql
+// camel-k: dependency=mvn:io.quarkus:quarkus-jdbc-postgresql:2.10.0.Final
 
 import org.apache.camel.builder.RouteBuilder;
 

@@ -14,12 +14,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-//
-// To run this integrations use:
-//
-//     kamel run ip.js
-//
-
 from('timer:dns?period=1000')
   .routeId('dns')
   .setHeader('dns.domain')

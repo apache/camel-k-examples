@@ -1,10 +1,12 @@
 # Knative Camel K Example
+
 This example shows how Camel K can be used to connect Knative building blocks to create awesome applications.
 
 A video version of this [demo is available on YouTube](https://youtu.be/btf_e2GniXM).
 **NB:** This video shows an outdated way of configuring the Camel Telegram component. The recent way uses a required `authorizationToken` query parameter (see the "Playing harder" section below).
 
-It's assumed that both Camel K and Knative are properly installed (both Knative Serving and Eventing) into the cluster. If not, please refer to the [official documentation to install and configure the components](https://knative.dev/docs/install/).
+It's assumed that both Camel K and Knative are properly installed (both Knative Serving and Eventing) into the cluster. 
+If not, please refer to the [official documentation to install and configure the components](https://knative.dev/docs/install/).
 
 We're going to create two channels:
 - messages
@@ -27,16 +29,17 @@ We'll install a Camel K integration that will print all words from the `words` c
 
 Writing a "function" that does this is as simple as writing:
 
-```
-from('knative:channel/words')
-  .convertBodyTo(String.class)
-  .to('log:info')
+```yaml
+- from:
+   uri: "knative:channel/words"
+   steps:
+    - to: "log:info"
 ```
 
 You can run this integration by running:
 
-```
-kamel run printer.groovy
+```shell
+kamel run --dev printer.yaml
 ```
 
 Under the hood, the Camel K operator does this:
@@ -53,17 +56,22 @@ split them and push the single words into the `words` channel.
 
 The integration code is super simple:
 
-```
-from('knative:channel/messages')
-  .split().tokenize(" ")
-  .log('sending ${body} to words channel')
-  .to('knative:channel/words')
+```yaml
+- from:
+    uri: "knative:channel/messages"
+    steps:
+      - split:
+          tokenize:
+            token: ' '
+          steps:
+            - log: "sending ${body} to words channel"
+            - to: "knative:channel/words"
 ```
 
 Let's run it with:
 
-```
-kamel run splitter.groovy
+```shell
+kamel run --dev splitter.yaml
 ```
 
 This integration will be also materialized as a Knative autoscaling service, because the only entrypoint is passive (waits for a push notification).
@@ -72,19 +80,22 @@ This integration will be also materialized as a Knative autoscaling service, bec
 
 We're going to feed this chain of functions using a timed feed like this:
 
-```
-from('timer:clock?period=3000')
-  .setBody().constant("Hello World from Camel K")
-  .to('knative:channel/messages')
-  .log('sent message to messages channel')
+```yaml
+- from:
+   uri: "timer:clock?period=3000"
+   steps:
+    - setBody:
+       constant: "Hello World from Camel K"
+    - to: "knative:channel/messages"
+    - log: "sent message to channel: messages"
 ```
 
 Every 3 seconds, the integration sends a message to the Knative `messages` channel.
 
 Let's run it with:
 
-```
-kamel run feed.groovy
+```shell
+kamel run --dev feed.yaml
 ```
 
 This cannot be materialized into an autoscaling service, but the operator understands it automatically and maps it to a plain Kubernetes Deployment
