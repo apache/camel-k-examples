@@ -15,16 +15,6 @@
  * limitations under the License.
  */
 
-// Run integration
-//
-// kamel run NettyServer.java -t service.type=NodePor --dev
-
-// Test
-//
-// recover the service location. If you're running on minikube, minikube service netty-server --url=true
-// curl http://<service-location>/hello
-//
-
 import org.apache.camel.builder.RouteBuilder;
 
 public class NettyServer extends RouteBuilder {

@@ -15,6 +15,7 @@ kubectl create -f postgres-storage.yaml
 kubectl create -f postgres-deployment.yaml
 kubectl create -f postgres-service.yaml
 ```
+
 ## Test the connection
 
 Connection credentials available in the [postgres-configmap.yaml](./postgres-configmap.yaml) descriptor.
@@ -23,10 +24,11 @@ Connection credentials available in the [postgres-configmap.yaml](./postgres-con
 kubectl get svc postgres
 ```
 
-To connect to the PostgreSQL database, run the command below, changing the pod name:
+To connect to the PostgreSQL database, run the command below:
 ```
-kubectl exec -it postgres-xxxx -- psql -h postgres -U postgresadmin --password -p 5432 postgresdb
+kubectl exec -it $(kubectl get pod -l app=postgres -o name) -- psql -h postgres -U postgresadmin --password -p 5432 postgresdb
 ```
+
 You will be prompted for password. Connection credentials are in the [postgres-configmap.yaml](./postgres-configmap.yaml) file. \
 After you enter your password, you should get a PostgreSQL shell
 
@@ -42,9 +44,11 @@ To create a table and populate it, run:
 CREATE TABLE test (data TEXT PRIMARY KEY);
 INSERT INTO test(data) VALUES ('hello'), ('world');
 ```
+
 ### Read the `test` table from the `testdb` database
 ```
 SELECT * FROM test;
 ```
-You should see 2 rows containing 'hello' and 'world' respectively. Enter `exit` to exit the shell. \
+
+You should see 2 rows containing 'hello' and 'world' respectively. Enter `exit` to exit the shell.
 Our `testdb` database works fine and can now be used in a Camel K integration.

@@ -21,21 +21,11 @@
 // openssl req -new -key server.key -out server.csr
 // openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
 
-// Storing certificate and keys in a secret
-// kubectl create secret generic my-self-signed-ssl --from-file=server.key --from-file=server.crt
-
-// Integration execution
-//
-// kamel run PlatformHttpsServer.java -p quarkus.http.ssl.certificate.files=/etc/ssl/my-self-signed-ssl/server.crt
-//                                    -p quarkus.http.ssl.certificate.key-files=/etc/ssl/my-self-signed-ssl/server.key
-//                                    --resource secret:my-self-signed-ssl@/etc/ssl/my-self-signed-ssl
-//                                    -t container.port=8443 -t service.type=NodePort --dev
-
-// Test
-//
-// recover the service location. If you're running on minikube, minikube service platform-https-server --url=true
-// curl -H "name:World" -k https://<service-location>/hello
-//
+// camel-k: resource=secret:my-self-signed-ssl@/etc/ssl/my-self-signed-ssl
+// camel-k: property=quarkus.http.ssl.certificate.files=/etc/ssl/my-self-signed-ssl/server.crt
+// camel-k: property=quarkus.http.ssl.certificate.key-files=/etc/ssl/my-self-signed-ssl/server.key
+// camel-k: trait=service.type=NodePort
+// camel-k: trait=container.port=8443
 
 import org.apache.camel.builder.RouteBuilder;
 

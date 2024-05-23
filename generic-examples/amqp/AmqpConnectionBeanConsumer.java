@@ -15,12 +15,6 @@
  * limitations under the License.
  */
 
-// You can bundle your credentials as a secret properties file:
-//
-// kubectl create secret generic my-amqp --from-file=amqp.properties
-// 
-// kamel run AmqpConnectionBeanConsumer.java --dev --config secret:my-amqp
-
 public class AmqpConnectionBeanConsumer extends org.apache.camel.builder.RouteBuilder {
     @Override
     public void configure() throws Exception {

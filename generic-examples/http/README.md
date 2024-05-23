@@ -23,20 +23,64 @@ cluster before starting the example.
 
 ## Running the Examples
 
-### Run the Integration in `NettySecureServer.java`:
-This integration requires a Keystore and a Truststore. Open [NettySecureServer.java](./NettySecureServer.java) to find instructions on how to generate a required `keystore.jks` and `truststore.jks` file. For this example, keystore and trustore password is `changeit`
+### Run the NettyServer
+
+```
+kamel run --dev -t service.type=NodePort NettyServer.java
+```
+
+Get the service location. If you're running on minikube, run `minikube service netty-server --url=true`. 
+
+You should see "Hello World" displayed on `http://<service-location>/hello`.
+Alternatively, you could run: `curl http://<service-location>/hello`.
+
+### Run the NettySecureServer
+
+This integration requires a Keystore and a Truststore. Open [NettySecureServer.java](./NettySecureServer.java) to find instructions on how to generate a required `keystore.jks` and `truststore.jks` file. For this example, keystore and truststore password is `changeit`
 
 Run the integration:
-```
-kamel run NettySecureServer.java -t mount.resources=secret:http-keystore/keystore.jks@/etc/ssl/keystore.jks \
-        -t mount.resources=secret:http-truststore/truststore.jks@/etc/ssl/truststore.jks \
-        -t container.port=8443 -t service.type=NodePort --dev
-```
-Get the service location. If you're running on minikube, run `minikube service netty-secure-server --url=true --https=true` \
-Visit `https://<service-location>/hello`. You should see "Hello Secure World" displayed on the web page. \
-Alternatively, you could run: `curl -k https://<service-location>/hello`.
 
-### Run the other Integrations:
-- Open [NettyServer.java](./NettyServer.java) to find instruction on how to run the integration.
-- Open [PlatformHttpsServer.java](./PlatformHttpsServer.java) to find instructions on how to generate a required private key and self-signed certificate, and also how to run the integration.
-- Open [PlatformHttpServer.java](./PlatformHttpServer.java) to find instruction on how to run the integration.
+```
+kubectl create secret generic http-keystore --from-file keystore.jks
+kubectl create secret generic http-truststore --from-file truststore.jks
+
+kamel run --dev \
+  -t mount.resources=secret:http-keystore/keystore.jks@/etc/ssl/keystore.jks \
+  -t mount.resources=secret:http-truststore/truststore.jks@/etc/ssl/truststore.jks \
+  -t container.port=8443 -t service.type=NodePort \
+  NettySecureServer.java
+```
+
+Get the service location. If you're running on minikube, run `minikube service netty-secure-server --url=true --https=true`.
+
+You should see "Hello Secure World" displayed on `https://<service-location>/hello`.
+Alternatively, you could run: `curl -vk https://<service-location>/hello`.
+
+**TODO:** [[#98]](https://github.com/apache/camel-k-examples/issues/98) NettySecureServer may not be able to access keystore
+
+### Run the PlatformHttpServer
+
+```
+kamel run --dev PlatformHttpServer.java
+```
+
+Get the service location. If you're running on minikube, run `minikube service platform-http-server --url=true`.
+
+You can now run `curl -H name:World http://<service-location>/hello`.
+
+### Run the PlatformHttpsServer
+
+This integration requires a server key and certificate. 
+Open [PlatformHttpsServer.java](./PlatformHttpsServer.java) to find instructions on how to generate those. 
+
+Run the integration:
+
+```
+kubectl create secret generic my-self-signed-ssl --from-file=server.key --from-file=server.crt
+
+kamel run --dev PlatformHttpsServer.java
+```
+
+Get the service location. If you're running on minikube, run `minikube service platform-https-server --url=true --https=true`.
+
+You can now run `curl -vk -H name:World https://<service-location>/hello`.

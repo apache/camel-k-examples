@@ -13,17 +13,17 @@ cluster before starting the example.
 
 ## Understanding the Example
 
-- [`CaffeineCacheSample.java`](./CaffeineCacheSample.java) defines a route that every second:
+- [`camel-caffeine.yaml`](./CaffeineCacheSample.java) defines a route that every second:
     - uses message headers to PUT a key-value pair in the cache and log the result
     - uses message headers to GET the cached value for the key and log the result
     - uses message headers to INVALIDATE the cached value for the key, logs about invalidating the data
     - uses message headers to GET the now discarded cached value for the key and log the result
-- [`camel-caffeine.groovy`](./camel-caffeine.groovy) does the same thing as `CaffeineCacheSample.java` except that a bean is defined and accumulation of cache statistics is enabled.
 
 ## Running the Example
+
 To see the logs in the terminal, run the integration in dev mode:
 ```
-kamel run --dev CaffeineCacheSample.java
+kamel run --dev camel-caffeine.yaml
 ```
 
 The following should be logged continuously to the terminal:

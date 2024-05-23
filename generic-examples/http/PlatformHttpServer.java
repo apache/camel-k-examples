@@ -15,15 +15,8 @@
  * limitations under the License.
  */
 
-// Run integration
-//
-// kamel run PlatformHttpServer.java -t service.enabled=true -t service.type=NodePort --dev
-
-// Test
-//
-// recover the service location. If you're running on minikube, minikube service platform-http-server --url=true
-// curl -H "name:World" http://<service-location>/hello
-//
+// camel-k: trait=service.enabled=true
+// camel-k: trait=service.type=NodePort
 
 import org.apache.camel.builder.RouteBuilder;
 

@@ -18,10 +18,12 @@ cluster before starting the example.
 To learn about more options for configuring DNS queries, [see here](https://camel.apache.org/components/3.17.x/dns-component.html)
 
 ## Running the Examples
+
 Run the `ip.js` integration:
 ```
-kamel run ip.js --dev
+kamel run --dev ip.js
 ```
+
 You should see the `IP address` logged to the terminal every second:
 ```terminal
 ...
@@ -31,8 +33,9 @@ You should see the `IP address` logged to the terminal every second:
 
 Run the `lookup.js` integration:
 ```
-kamel run lookup.js --dev
+kamel run --dev lookup.js
 ```
+
 Every 10 seconds, You should see the MX records associated with the specified domain being logged to the terminal. Each MX record should have a `Target` value, a `Priority` value for the target, and a `TTL` value:
 ```terminal
 ...
