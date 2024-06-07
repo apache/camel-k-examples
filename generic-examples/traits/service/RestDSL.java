@@ -15,11 +15,6 @@
  * limitations under the License.
  */
 
-//
-// To run this integrations use:
-//     kamel run RestDSL.java --trait service.enabled=true\
-//     --trait service.node-port=true
-//
 import org.apache.camel.Exchange;
 
 public class RestDSL extends org.apache.camel.builder.RouteBuilder {

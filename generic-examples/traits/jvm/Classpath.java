@@ -15,11 +15,6 @@
  * limitations under the License.
  */
 
-// Create a configmap holding a jar in order to simulate the presence of a dependency on the runtime image
-// kubectl create configmap my-dep --from-file=sample-1.0.jar
-
-//kamel run --resource configmap:my-dep -t jvm.classpath=/etc/camel/resources/my-dep/sample-1.0.jar Classpath.java --dev
-
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.example.MyClass;
 

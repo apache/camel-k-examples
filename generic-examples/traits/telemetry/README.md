@@ -1,13 +1,12 @@
 # Camel K Telemetry Trait
 
-In this section you will find examples about fine tuning your `Integration` using **Telemetry** `trait` capability.
+In this section you will find examples about fine-tuning your `Integration` using **Telemetry** `trait` capability.
 
 The Telemetry trait can be used to automatically publish tracing information of interactions to an OTLP compatible collector.
 
 ## Configure and Setup OTLP collector
 
 You can choose which distributed tracing tool you want to use as long as it offers a OTLP compatible collector.
-
 
 ### Configure and Setup Jaeger
 
