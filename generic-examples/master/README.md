@@ -8,11 +8,11 @@ You can find more information about Apache Camel and Apache Camel K on the [offi
 
 Read the general instructions in the [root README.md file](/README.md) for setting up your environment and the Kubernetes cluster before looking at this example.
 
-Make sure you've read the [installation instructions](https://camel.apache.org/camel-k/latest/installation/installation.html) for your specific
-cluster before starting the example.
+Make sure you've read the [installation instructions](https://camel.apache.org/camel-k/latest/installation/installation.html) for your specific cluster before starting the example.
 
 ## Understanding the Example
-- [Master.java](./Master.java): defines a route that will be started only on a single instance/pod. This is defined by prefixing the camel endpoint with `master:someName`.
+
+- [master.yaml](./master.yaml): defines a route that will be started only on a single instance/pod. This is defined by prefixing the camel endpoint with `master:someName`.
 Under the hood, the pod replicas take part in a leader election where each pod races to become the leader. The pod that emerges as leader will be the only instance that is active and consumes from the specified camel endpoint. If the leader fails, another pod becomes the new leader, thus becoming the only instance that consumes from the camel endpoint.
 
 ## Running the example
@@ -20,12 +20,12 @@ Under the hood, the pod replicas take part in a leader election where each pod r
 
 Run the integration:
 ```
-kamel run Master.java
+$ kamel run master.yaml
 ```
 In this example, we will use the [stern](https://github.com/stern/stern) CLI tool to view the logs because it allows us to view multiple pod logs at the same time. <br>
 Since only a single instance is created, that becomes the leader and logs the routed message: _"This message is printed by a single pod, even if you increase the number of replicas!"_.
 ```
-stern master
+$ stern master
 ```
 ```
 ...
@@ -40,8 +40,9 @@ master-6f8df78d54-lbnwp integration 2022-09-11 18:38:03,641 INFO  [info] (Camel 
 
 Increase the number of replicas:
 ```
-kubectl scale it master --replicas 3
+$ kubectl scale it master --replicas 3
 ```
+
 Still looking at the logs from `stern master` we see that although more instances have been created, the routed message is still being logged by the leader pod alone.
 
 ```
@@ -56,7 +57,7 @@ In the event that the leader fails, the other instances race to become the new l
 
 Kill the leader pod:
 ```
-kubectl delete pod <your-leader-pod-name>
+$ kubectl delete pod <your-leader-pod-name>
 ```
 Looking at the logs from `stern master`, we see the other pod replicas attempt to become the new leader. Later, a new leader emerges that carries out the function of printing the message:
 ```

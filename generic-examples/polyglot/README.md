@@ -3,5 +3,5 @@
 Run an integration using different Camel DSL languages.
 
 ```
-$ kamel run --name polyglot routes.xml beans.groovy JavaRoute.java
+$ kamel run --name polyglot --dev routes.yaml beans.groovy JavaRoute.java
 ```

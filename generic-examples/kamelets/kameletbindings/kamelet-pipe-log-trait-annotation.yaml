@@ -16,16 +16,14 @@
 # ---------------------------------------------------------------------------
 
 apiVersion: camel.apache.org/v1
-kind: Kamelet
+kind: Pipe
 metadata:
-  name: env-var-writer
+  name: timer-2-log-annotation
+  annotations:
+    trait.camel.apache.org/logging.level: DEBUG
+    trait.camel.apache.org/logging.color: "false"
 spec:
-  definition:
-    title: "Log some env vars"   
-  template:
-    from:
-      uri: kamelet:source
-      steps:
-      - set-body:
-          simple: "${env:MY_ENV_VAR1} / ${env:MY_ENV_VAR2}"
-      - to: "log:bar"  
+  source:
+    uri: timer:foo
+  sink:
+    uri: log:bar

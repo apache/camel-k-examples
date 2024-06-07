@@ -24,7 +24,7 @@ In order to follow this example:
 ## Understanding the Example
 This example uses the cron component to trigger a route at a specific time interval specified in a cron expression. The route transforms data from the cron source and sends it to the logger.
 
-The integration is all contained in a single file named `cron.groovy`
+The integration is all contained in a single file named `cron.yaml`
 
 ## Running the Example
 

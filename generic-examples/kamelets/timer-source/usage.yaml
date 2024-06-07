@@ -1,3 +1,5 @@
+# camel-k: language=yaml
+
 # ---------------------------------------------------------------------------
 # Licensed to the Apache Software Foundation (ASF) under one or more
 # contributor license agreements.  See the NOTICE file distributed with
@@ -15,23 +17,7 @@
 # limitations under the License.
 # ---------------------------------------------------------------------------
 
-# Apply kamelet used in this binding
-# kubectl apply -f env-var-writer.kamelet.yaml
-#
-# Apply kamelet binding
-# kubectl apply -f kb-env-vars.yaml
-# 
-apiVersion: camel.apache.org/v1alpha1
-kind: KameletBinding
-metadata:
-  name: timer-to-log
-  annotations: 
-    trait.camel.apache.org/environment.vars: "[\"MY_ENV_VAR1 = value1\", \"MY_ENV_VAR2 = value2\"]"
-spec:
-  source:
-    uri: timer:foo
-  sink:
-    ref:
-      kind: Kamelet
-      apiVersion: camel.apache.org/v1alpha1
-      name: env-var-writer
+- from:
+   uri: "kamelet:timer-source?message=Hello+Kamelets&period=1000"
+   steps:
+    - to: "log:info"

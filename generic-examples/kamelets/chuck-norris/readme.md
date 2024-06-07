@@ -6,15 +6,16 @@ This example shows how you can use an out of the box Kamelet with your Camel app
 
 This example uses the Chuck Norris Kamelet that periodically gets a joke from the Chuck Norris internet database.
 
-A Camel routes is _coded_ in the `chuck.xml` file using the XML DSL that uses the Kamelet,
+A Camel routes is _coded_ in the `chuck.yaml` file using the XML DSL that uses the Kamelet,
 and log the result from the Kamelet to the console.
 
 ## Running the example
 
 Just run the integration via:
 ```
-$ kamel run chuck.xml
+$ kamel run chuck.yaml
 ```
+
 You should be able to see the new integration running after some time:
 ```
 $ kamel get
