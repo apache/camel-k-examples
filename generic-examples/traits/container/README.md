@@ -1,8 +1,8 @@
 # Camel K Container Trait
 
-In this section you will find examples about fine tuning your `Integration` using **Container** `trait` capability.
+In this section you will find examples about fine-tuning your `Integration` using **Container** `trait` capability.
 
-The Container trait is a  platform trait, it is **enabled** by default.
+The Container trait is a platform trait, it is **enabled** by default.
 
 ## Before you begin
 
@@ -25,9 +25,8 @@ kamel run \
   --trait container.limit-memory=500Mi
 ```
 
-
-
 When you check the values declared by the pod spec
+
 ```sh
 kubectl get pods --selector="camel.apache.org/integration"="container" -o yaml
 ```
@@ -37,7 +36,6 @@ You should get a result with the values you defined
 ```yaml
 ...
                 "imagePullPolicy": "Always",
-
 ...
                 "resources": {
                     "limits": {
@@ -48,13 +46,13 @@ You should get a result with the values you defined
                         "cpu": "5m",
                         "memory": "100Mi"
                     }
-                },
+                }
 ...
 ```
 
 ## Advanced usages
 
-The container and service port configuration needs needs the presence of a service, else it will be ignored.
+The container and service port configuration needs the presence of a service, else it will be ignored.
 
 For these example, we use an example route exposing some rest endpoint. This will enable the service and expose the container port by default.
 
@@ -76,7 +74,7 @@ kamel run --name restcontainer \
 When you check the values declared by the service spec
 
 ```sh
-kubectl get service restcontainer  -o jsonpath='{.spec.ports}'
+kubectl get service restcontainer -o jsonpath='{.spec.ports}'
 ```
 
 You should get a result with the values you defined
@@ -101,8 +99,7 @@ kamel run \
 ```
 
 ```sh
-kubectl get pods --selector="camel.apache.org/integration"="restcontainer" \
-    -o jsonpath= -o jsonpath='{.items[*].spec.containers[*].ports}'
+kubectl get pods --selector="camel.apache.org/integration"="restcontainer" -o jsonpath='{.items[*].spec.containers[*].ports}'
 ```
 
 You should get a result with the values you defined

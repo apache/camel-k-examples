@@ -1,10 +1,11 @@
 # Camel K Examples
 
-This folder contains various examples of `Camel K` integrations. You can use them to learn more about the capabilities of Camel K or to inspire your integration development.
+This folder contains various examples of `Camel K` integrations. You can use them to learn more about the capabilities
+of Camel K or to inspire your integration development.
 
 ## Basic usage examples
 
-In this section you will find the most basic examples. Useful to start learning about Camel K and how to run. 
+In this section you will find the most basic examples. Useful to start learning about Camel K and how to run.
 You can use many supported languages and learn about the most basic features:
 
 | Type              | Description                                                                                       | Link                           |
@@ -22,7 +23,9 @@ You can use many supported languages and learn about the most basic features:
 
 ## Component usage examples
 
-In this section you can find a few examples of certain [`Camel` components](https://camel.apache.org/components/latest/index.html). This is a limited number of the wide variety of components supported by Apache Camel. 
+In this section you can find a few examples of certain [
+`Camel` components](https://camel.apache.org/components/latest/index.html). This is a limited number of the wide variety
+of components supported by Apache Camel.
 You can also find useful examples [in this repository](https://github.com/apache/camel-k-examples).
 
 | Type       | Description     | Link                         |
@@ -37,7 +40,8 @@ You can also find useful examples [in this repository](https://github.com/apache
 
 ## Advanced usage examples
 
-When you feel comfortable with basic stuff, you may want to try the more advanced features offered by Camel K. Here a few examples:
+When you feel comfortable with basic stuff, you may want to try the more advanced features offered by Camel K. Here a
+few examples:
 
 | Type     | Description                                                                           | Link                        |
 |----------|---------------------------------------------------------------------------------------|-----------------------------|
@@ -52,9 +56,11 @@ When you feel comfortable with basic stuff, you may want to try the more advance
 
 Traits configuration will be very helpful to fine tune your `Integration`. Here a few examples:
 
-| Type                  | Description                             | Link                                |
-|-----------------------|-----------------------------------------|-------------------------------------|
-| Container             | How to customize with `container` trait | [see examples](./traits/container/) |
-| Health                | How to customize with `health` trait    | [see examples](./traits/health/)    |
-| JVM                   | How to use `jvm` trait                  | [see examples](./traits/jvm/)       |
-| Tracing (opentracing) | How to use `tracing` trait              | [see examples](./traits/tracing/)   |
+| Type       | Description                             | Link                                 |
+|------------|-----------------------------------------|--------------------------------------|
+| Container  | How to customize with `container` trait | [see examples](./traits/container/)  |
+| Health     | How to customize with `health` trait    | [see examples](./traits/health/)     |
+| JVM        | How to use `jvm` trait                  | [see examples](./traits/jvm/)        |
+| Prometheus | How to use `prometheus` trait           | [see examples](./traits/prometheus/) |
+| Service    | How to use `service` trait              | [see examples](./traits/service/)    |
+| Telemetry  | How to use `telemetry` trait            | [see examples](./traits/telemetry/)  |

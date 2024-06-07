@@ -18,13 +18,7 @@
 # ---------------------------------------------------------------------------
 
 - from:
-    uri: "timer:tick"
-    parameters:
-      period: "5000"
-      includeMetadata: true
+    uri: "rest:get:/hello"
     steps:
-      - set-body:
-          simple: "Hello Yaml #${header.CamelTimerCounter}"
-      - transform:
-          simple: "${body.toUpperCase()}"
-      - to: "log:info"
+      - setBody:
+          simple: "Hello World"

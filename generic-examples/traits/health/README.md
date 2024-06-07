@@ -1,6 +1,6 @@
 # Camel K Health Trait
 
-In this section you will find examples about fine tuning your `Integration` using **Health** `trait` capability.
+In this section you will find examples about fine-tuning your `Integration` using **Health** `trait` capability.
 
 The Health trait can be used to activate and configure the Health Probes on the integration container.
 
@@ -12,7 +12,7 @@ Make sure you've read the [installation instructions](https://camel.apache.org/c
 
 ## Basic usage
 
-By default the trait is disabled so it needs to be activated.
+By default, the trait is disabled so it needs to be activated.
 
 To activate the trait and configure the liveness Probes, run the integration
 
@@ -29,13 +29,14 @@ kamel run \
     --trait health.liveness-timeout=2
 ```
 
-
 When you check the values declared by the pod spec
+
 ```sh
 kubectl get pods --selector="camel.apache.org/integration"="health" -o jsonpath='{.items[*].spec.containers[*].livenessProbe}'
 ```
 
 You should get a result with the values you defined
+
 ```json
 {"failureThreshold":5,"httpGet":{"path":"/q/health/live","port":8080,"scheme":"HTTP"},"initialDelaySeconds":30,"periodSeconds":10,"successThreshold":1,"timeoutSeconds":2}
 ```
@@ -67,7 +68,6 @@ Run the integration
     --trait health.readiness-probe-enabled=true \
     --trait health.readiness-scheme=HTTPS
 ```
-
 
 When you check the values declared by the pod spec for the readinessProbe
 ```sh

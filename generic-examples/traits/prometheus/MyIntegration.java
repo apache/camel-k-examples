@@ -15,17 +15,10 @@
  * limitations under the License.
  */
 
-/*
-
-To execute this example, run: 
-kamel run -t prometheus.enabled=true MyIntegration.java
-
-*/
 
 import org.apache.camel.Exchange;
 import org.apache.camel.LoggingLevel;
 import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.component.microprofile.metrics.MicroProfileMetricsConstants;
 
 public class MyIntegration extends RouteBuilder {
 
@@ -39,12 +32,10 @@ public class MyIntegration extends RouteBuilder {
                 .log(LoggingLevel.ERROR, "Failed processing ${body}")
                 .to("log:exception");
 
-        from("timer:foo?period=1000")
+        from("timer:foo?includeMetadata=true")
                 .routeId("unreliable-service")
                 .setBody(header(Exchange.TIMER_COUNTER).prepend("event #"))
-                .log("Processing ${body}...")
-                .bean("service", "process")
                 .log("Successfully processed ${body}")
-                .to("microprofile-metrics:meter:success");
+                .to("micrometer:counter:success");
     }
 }
