@@ -107,7 +107,7 @@ If you've installed all the services, you'll find that the printer pod will prin
 
 If you now stop the feed integration (`kamel delete feed`) you will notice that the other services (splitter and printer) will scale down to 0 in few minutes.
 
-And if you reinstall the feed again (`kamel run feed.groovy`), the other integration will scale up again as soon as they receive messages (splitter first, then printer).
+And if you reinstall the feed again (`kamel run feed.yaml`), the other integration will scale up again as soon as they receive messages (splitter first, then printer).
 
 ## Playing harder
 

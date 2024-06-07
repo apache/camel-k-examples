@@ -1,3 +1,5 @@
+# camel-k: language=yaml
+
 # ---------------------------------------------------------------------------
 # Licensed to the Apache Software Foundation (ASF) under one or more
 # contributor license agreements.  See the NOTICE file distributed with
@@ -15,17 +17,11 @@
 # limitations under the License.
 # ---------------------------------------------------------------------------
 
-apiVersion: camel.apache.org/v1
-kind: Kamelet
-metadata:
-  name: env-var-writer
-spec:
-  definition:
-    title: "Log some env vars"   
-  template:
-    from:
-      uri: kamelet:source
-      steps:
-      - set-body:
-          simple: "${env:MY_ENV_VAR1} / ${env:MY_ENV_VAR2}"
-      - to: "log:bar"  
+- from:
+    uri: "timer:hello?period=3000"
+    steps:
+      - process:
+          ref: "javaProcessor"
+      - process:
+          ref: "groovyProcessor"
+      - to: "log:info?showAll=true&multiline=true"

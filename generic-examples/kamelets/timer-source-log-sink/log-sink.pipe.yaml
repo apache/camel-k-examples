@@ -16,16 +16,17 @@
 # ---------------------------------------------------------------------------
 
 apiVersion: camel.apache.org/v1
-kind: Kamelet
+kind: Pipe
 metadata:
-  name: env-var-writer
+  name: log-event-sink
 spec:
-  definition:
-    title: "Log some env vars"   
-  template:
-    from:
-      uri: kamelet:source
-      steps:
-      - set-body:
-          simple: "${env:MY_ENV_VAR1} / ${env:MY_ENV_VAR2}"
-      - to: "log:bar"  
+  source:
+    ref:
+      kind: InMemoryChannel
+      apiVersion: messaging.knative.dev/v1
+      name: messages
+  sink:
+    ref:
+      kind: Kamelet
+      apiVersion: camel.apache.org/v1
+      name: log-sink

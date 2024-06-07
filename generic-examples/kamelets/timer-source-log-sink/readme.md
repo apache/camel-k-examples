@@ -3,6 +3,7 @@
 This example shows how to create a simple timer `event source` and a log `event sink`. The timer events emitted are consumed by a simple logging connector which will print out those events.
 
 ## Additional requirement for running this example
+
 - You should have Knative properly installed on your cluster ([see installation guide](https://knative.dev/docs/install/))
 
 ## Create events source and sink
@@ -15,11 +16,11 @@ $ kubectl apply -f log-sink.kamelet.yaml
 
 You can check the newly created `kamelet`s in the list.
 ```
-$ kubectl get kamelets
+$ kubectl get kamelets timer-source log-sink
 
 NAME           PHASE
-log-sink       Ready
 timer-source   Ready
+log-sink       Ready
 ```
 
 ## Create channel destination
@@ -31,17 +32,17 @@ $ kubectl apply -f timer-events.yaml
 
 ## Binding events
 
-We can now bind the timer event source to produce events on the destination with the `timer-source.binding.yaml` configuration.
+We can now bind the timer event source to produce events on the destination with the `timer-source.pipe.yaml` configuration.
 ```
-$ kubectl apply -f timer-source.binding.yaml
+$ kubectl apply -f timer-source.pipe.yaml
 ```
-In a similar fashion you can bind to the log sink in order to consume those events with the `log-sink.binding.yaml` configuration.
+In a similar fashion you can bind to the log sink in order to consume those events with the `log-sink.pipe.yaml` configuration.
 ```
-$ kubectl apply -f log-sink.binding.yaml
+$ kubectl apply -f log-sink.pipe.yaml
 ```
-You can check the newly created bindings listing the `KameletBidings`.
+You can check the newly created bindings listing the `Pipes`.
 ```
-$ kubectl get KameletBindings
+$ kubectl get Pipes
 
 NAME                 PHASE
 log-event-sink       Ready

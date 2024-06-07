@@ -15,15 +15,23 @@
 # limitations under the License.
 # ---------------------------------------------------------------------------
 
-apiVersion: camel.apache.org/v1alpha1
-kind: KameletBinding
+# Apply kamelet used in this binding
+# kubectl apply -f env-var-writer.kamelet.yaml
+#
+# Apply kamelet binding
+# kubectl apply -f kb-env-vars.yaml
+# 
+apiVersion: camel.apache.org/v1
+kind: Pipe
 metadata:
-  name: timer-2-log-annotation
-  annotations:
-    trait.camel.apache.org/logging.level: DEBUG
-    trait.camel.apache.org/logging.color: "false"
+  name: timer-to-log
+  annotations: 
+    trait.camel.apache.org/environment.vars: "[\"MY_ENV_VAR1 = value1\", \"MY_ENV_VAR2 = value2\"]"
 spec:
   source:
     uri: timer:foo
   sink:
-    uri: log:bar
+    ref:
+      kind: Kamelet
+      apiVersion: camel.apache.org/v1
+      name: env-var-writer

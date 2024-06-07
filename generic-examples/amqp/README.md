@@ -19,7 +19,7 @@ cluster before starting the example.
 
 - [`AmqpConnectionBeanProducer.java`](./AmqpConnectionBeanProducer.java) defines a route that generates a message every second and sends it to an amqp queue.
 - [`AmqpConnectionBeanConsumer.java`](./AmqpConnectionBeanConsumer.java) consumes messages from the amqp queue, logs them to the logger using the info level
-- [`amqp.groovy`](./amqp.groovy) generates a message every second and sends to amqp topic
+- [`amqp.yaml`](./amqp.yaml) generates a message every second and sends to amqp topic
 - [`amqp.properties`](./amqp.properties) holds required credentials to connect to broker.
 
 ## Running the Example

@@ -4,7 +4,8 @@ This folder contains various examples of `Camel K` integrations. You can use the
 
 ## Basic usage examples
 
-In this section you will find the most basic examples. Useful to start learning about Camel K and how to run. You can use many supported languages and learn about the most basic features:
+In this section you will find the most basic examples. Useful to start learning about Camel K and how to run. 
+You can use many supported languages and learn about the most basic features:
 
 | Type              | Description                                                                                       | Link                           |
 |-------------------|---------------------------------------------------------------------------------------------------|--------------------------------|
@@ -21,7 +22,8 @@ In this section you will find the most basic examples. Useful to start learning 
 
 ## Component usage examples
 
-In this section you can find a few examples of certain [`Camel` components](https://camel.apache.org/components/latest/index.html). This is a limited number of the wide variety of components supported by Apache Camel. You can also find useful examples [in this repository](https://github.com/apache/camel-k-examples).
+In this section you can find a few examples of certain [`Camel` components](https://camel.apache.org/components/latest/index.html). This is a limited number of the wide variety of components supported by Apache Camel. 
+You can also find useful examples [in this repository](https://github.com/apache/camel-k-examples).
 
 | Type       | Description     | Link                         |
 |------------|-----------------|------------------------------|
@@ -35,17 +37,16 @@ In this section you can find a few examples of certain [`Camel` components](http
 
 ## Advanced usage examples
 
-As soon as you will learn the basic stuff, you will like to try the new advanced feature offered by Camel K. Here a few examples:
+When you feel comfortable with basic stuff, you may want to try the more advanced features offered by Camel K. Here a few examples:
 
-| Type     | Description                                                                             | Link                        |
-|----------|-----------------------------------------------------------------------------------------|-----------------------------|
-| Kamelets | How to use [`Kamelet`s](https://camel.apache.org/camel-k/latest/kamelets/kamelets.html) | [see examples](./kamelets/) |
-| Master   | Master support example                                                                  | [see examples](./master/)   |
-| OLM      | OPERATOR Lifecycle manager installation example                                         | [see examples](./olm/)      |
-| Polyglot | Polyglot integration examples                                                           | [see examples](./polyglot/) |
-| Pulsar   | Pulsar usage                                                                            | [see examples](./pulsar/)   |
-| Saga     | Saga pattern example                                                                    | [see examples](./saga/)     |
-| Tekton   | Tekton tutorial                                                                         | [see examples](./tekton/)   |
+| Type     | Description                                                                           | Link                        |
+|----------|---------------------------------------------------------------------------------------|-----------------------------|
+| Kamelets | How to use [Kamelets](https://camel.apache.org/camel-k/latest/kamelets/kamelets.html) | [see examples](./kamelets/) |
+| Master   | Master support example                                                                | [see examples](./master/)   |
+| Polyglot | Polyglot integration examples                                                         | [see examples](./polyglot/) |
+| Pulsar   | Pulsar usage                                                                          | [see examples](./pulsar/)   |
+| Saga     | Saga pattern example                                                                  | [see examples](./saga/)     |
+| Tekton   | Tekton tutorial                                                                       | [see examples](./tekton/)   |
 
 ## Traits usage examples
 

@@ -1,3 +1,5 @@
+# camel-k: language=yaml
+
 # ---------------------------------------------------------------------------
 # Licensed to the Apache Software Foundation (ASF) under one or more
 # contributor license agreements.  See the NOTICE file distributed with
@@ -15,20 +17,7 @@
 # limitations under the License.
 # ---------------------------------------------------------------------------
 
-apiVersion: camel.apache.org/v1alpha1
-kind: KameletBinding
-metadata:
-  name: timer-source
-spec:
-  source:
-    ref:
-      kind: Kamelet
-      apiVersion: camel.apache.org/v1alpha1
-      name: timer-source
-    properties:
-      message: "Hello world!"
-  sink:
-    ref:
-      kind: InMemoryChannel
-      apiVersion: messaging.knative.dev/v1
-      name: messages
+- from:
+    uri: "kamelet:chuck-norris-source"
+    steps:
+      - to: "log:info"
