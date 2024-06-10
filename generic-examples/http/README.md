@@ -36,14 +36,24 @@ Alternatively, you could run: `curl http://<service-location>/hello`.
 
 ### Run the NettySecureServer
 
-This integration requires a Keystore and a Truststore. Open [NettySecureServer.java](./NettySecureServer.java) to find instructions on how to generate a required `keystore.jks` and `truststore.jks` file. For this example, keystore and truststore password is `changeit`
+This integration requires a Keystore and a Truststore. Open [NettySecureServer.java](./NettySecureServer.java) to find instructions on how to generate a required `keystore.jks` and `truststore.jks` file. 
+For this example, keystore and truststore password is `changeit`
 
-Run the integration:
-
+Generate keystore.jks and truststore.jks (for this example, keystore and truststore password = changeit):
+```shell
+keytool -genkeypair -alias EntryName -keyalg RSA -keysize 2048 -keystore keystore.jks
+keytool -exportcert -alias EntryName -keystore keystore.jks -rfc -file public.cert
+keytool -import -alias EntryName -file public.cert -storetype JKS -keystore truststore.jks
 ```
+
+Create the secrets associated with the stores:
+```shell
 kubectl create secret generic http-keystore --from-file keystore.jks
 kubectl create secret generic http-truststore --from-file truststore.jks
+```
 
+Run the integration:
+```shell
 kamel run --dev \
   -t mount.resources=secret:http-keystore/keystore.jks@/etc/ssl/keystore.jks \
   -t mount.resources=secret:http-truststore/truststore.jks@/etc/ssl/truststore.jks \
@@ -55,8 +65,6 @@ Get the service location. If you're running on minikube, run `minikube service n
 
 You should see "Hello Secure World" displayed on `https://<service-location>/hello`.
 Alternatively, you could run: `curl -vk https://<service-location>/hello`.
-
-**TODO:** [[#98]](https://github.com/apache/camel-k-examples/issues/98) NettySecureServer may not be able to access keystore
 
 ### Run the PlatformHttpServer
 

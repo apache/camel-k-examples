@@ -15,16 +15,6 @@
  * limitations under the License.
  */
 
-// Generate keystore.jks and truststore.jks (for this example, keystore and truststore password = changeit):
-//
-// keytool -genkeypair -alias EntryName -keyalg RSA -keysize 2048 -keystore keystore.jks
-// keytool -exportcert -alias EntryName -keystore keystore.jks -rfc -file public.cert
-// keytool -import -alias EntryName -file public.cert -storetype JKS -keystore truststore.jks
-
-// Create the secrets associated with the stores:
-//
-// kubectl create secret generic http-keystore --from-file keystore.jks
-// kubectl create secret generic http-truststore --from-file truststore.jks
 
 import org.apache.camel.builder.RouteBuilder;
 
@@ -40,13 +30,13 @@ public class NettySecureServer extends RouteBuilder {
 
    private void registerSslContextParameter() throws Exception {
       KeyStoreParameters ksp = new KeyStoreParameters();
-      ksp.setResource("/etc/ssl/keystore.jks");
+      ksp.setResource("file:/etc/ssl/keystore.jks");
       ksp.setPassword("changeit");
       KeyManagersParameters kmp = new KeyManagersParameters();
       kmp.setKeyPassword("changeit");
       kmp.setKeyStore(ksp);
       KeyStoreParameters tsp = new KeyStoreParameters();
-      tsp.setResource("/etc/ssl/truststore.jks");
+      tsp.setResource("file:/etc/ssl/truststore.jks");
       tsp.setPassword("changeit");
       TrustManagersParameters tmp = new TrustManagersParameters();
       tmp.setKeyStore(tsp);
