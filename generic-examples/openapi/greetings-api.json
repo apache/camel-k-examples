@@ -1,44 +1,60 @@
 {
-  "swagger" : "2.0",
-  "info" : {
-    "version" : "1.0",
-    "title" : "Greeting REST API"
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Greeting REST API",
+    "version": "1.0"
   },
-  "host" : "",
-  "basePath" : "/camel/",
-  "tags" : [ {
-    "name" : "greetings",
-    "description" : "Greeting to {name}"
-  } ],
-  "schemes" : [ "http" ],
-  "paths" : {
-    "/greetings/{name}" : {
-      "get" : {
-        "tags" : [ "greetings" ],
-        "operationId" : "greeting-api",
-        "parameters" : [ {
-          "name" : "name",
-          "in" : "path",
-          "required" : true,
-          "type" : "string"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "Output type",
-            "schema" : {
-              "$ref" : "#/definitions/Greetings"
+  "servers": [
+    {
+      "url": "/camel/"
+    }
+  ],
+  "tags": [
+    {
+      "name": "greetings",
+      "description": "Greeting to {name}"
+    }
+  ],
+  "paths": {
+    "/greetings/{name}": {
+      "get": {
+        "tags": [
+          "greetings"
+        ],
+        "operationId": "greeting-api",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Output type",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Greetings"
+                }
+              }
             }
           }
         }
       }
     }
   },
-  "definitions" : {
-    "Greetings" : {
-      "type" : "object",
-      "properties" : {
-        "greetings" : {
-          "type" : "string"
+  "components": {
+    "schemas": {
+      "Greetings": {
+        "type": "object",
+        "properties": {
+          "greetings": {
+            "type": "string"
+          }
         }
       }
     }
