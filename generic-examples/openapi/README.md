@@ -8,7 +8,7 @@ Deploy the examples running
 
 ```
 kubectl create configmap my-openapi --from-file=greetings-api.json
-kamel run --dev --name greetings --open-api configmap:my-openapi greetings.yaml
+kamel run greetings.yaml --resource configmap:my-openapi --dev
 ```
 
 If on minikube, you can get the service endpoint address like this ...
